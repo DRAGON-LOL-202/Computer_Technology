@@ -1,0 +1,2361 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer Technology — BY DRAGON_LOL</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&family=Tajawal:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{
+  --bg:#f0fdf4;--surface:#ffffff;--surface2:#f0fdf4;--surface3:#dcfce7;
+  --border:rgba(34,197,94,.18);--border2:rgba(34,197,94,.35);
+  --accent:#16a34a;--accent2:#22c55e;--accent3:#4ade80;--accent4:#15803d;
+  --green:#16a34a;--red:#ef4444;--blue:#3b82f6;--cyan:#06b6d4;--yellow:#f59e0b;
+  --text:#14532d;--muted:#4ade80;--dark:#052e16;
+  --white:#ffffff;--light:#f0fdf4;
+  --card-shadow:0 2px 16px rgba(34,197,94,.10);
+}
+body.dark-theme{
+  --bg:#020712;--surface:#071424;--surface2:#0c1b31;--surface3:#113b2b;
+  --border:rgba(74,222,128,.24);--border2:rgba(74,222,128,.42);
+  --accent:#22c55e;--accent2:#4ade80;--accent3:#86efac;--accent4:#bbf7d0;
+  --green:#4ade80;--red:#f87171;--blue:#60a5fa;--cyan:#22d3ee;--yellow:#fbbf24;
+  --text:#e8fff2;--muted:#a7f3d0;--dark:#f0fff7;
+  --white:#071424;--light:#0c1b31;
+  --card-shadow:0 12px 32px rgba(0,0,0,.52);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+button,input,select,textarea{font:inherit}
+button{touch-action:manipulation;cursor:pointer}
+ 
+.bank-parent-code{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.25);border-radius:10px;
+  padding:8px 13px;margin-bottom:8px;font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--accent4);line-height:1.7}
+.bank-card-sub{border-left:3px solid rgba(34,197,94,.4);margin-left:18px;background:var(--surface2)!important}
+.bank-sub-badge{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:var(--accent);
+  font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;margin-right:7px;vertical-align:middle}
+ 
+/* BG */
+.bg-layer{position:fixed;inset:0;pointer-events:none;z-index:0}
+.bg-layer::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 50% at 10% 10%,rgba(34,197,94,.07) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 90%,rgba(6,182,212,.05) 0%,transparent 60%)}
+.bg-layer::after{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(34,197,94,.06) 1px,transparent 1px);
+  background-size:40px 40px;opacity:.5}
+ 
+.container{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:2rem 1.25rem 4rem}
+.top-controls{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:.75rem}
+.theme-toggle-btn{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:12px;
+  border:1px solid var(--border2);background:var(--surface);color:var(--accent);font-size:12.5px;font-weight:700;
+  transition:all .2s;box-shadow:var(--card-shadow)}
+.theme-toggle-btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+.theme-toggle-icon{font-size:14px;line-height:1;display:inline-flex;align-items:center}
+body.dark-theme .theme-toggle-btn{
+  background:linear-gradient(135deg,rgba(34,197,94,.16),rgba(6,182,212,.08));
+  border-color:rgba(74,222,128,.5);
+  color:#dcfce7;
+}
+ 
+/* Creator Tag */
+.creator-tag-wrap{display:flex;justify-content:center;margin-bottom:.5rem}
+.creator-tag{display:inline-flex;align-items:center;gap:10px;padding:9px 22px;border-radius:999px;
+  background:linear-gradient(135deg,rgba(22,163,74,.15),rgba(6,182,212,.08));
+  border:1px solid rgba(34,197,94,.4);color:var(--dark);font-size:12px;font-weight:700;letter-spacing:.1em;
+  box-shadow:0 6px 24px rgba(34,197,94,.15),inset 0 0 0 1px rgba(255,255,255,.6);text-transform:uppercase}
+.creator-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);box-shadow:0 0 12px rgba(34,197,94,.9);animation:pdot 2s ease infinite}
+@keyframes pdot{0%,100%{transform:scale(1)}50%{transform:scale(1.55)}}
+ 
+/* Header */
+.site-header{text-align:center;padding:1.5rem 0 1.2rem}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(22,163,74,.1);
+  border:1px solid rgba(34,197,94,.3);color:var(--accent);font-size:12px;font-weight:700;
+  padding:5px 18px;border-radius:30px;margin-bottom:.8rem;letter-spacing:.05em}
+.site-header h1{font-family:'Tajawal',sans-serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;
+  background:linear-gradient(135deg,var(--dark) 0%,var(--accent) 45%,var(--cyan) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.35rem;line-height:1.2}
+.site-header p{color:#4b7c5e;font-size:13.5px}
+body.dark-theme .site-header p{color:#bbf7d0}
+body.dark-theme .bg-layer::before{
+  background:
+    radial-gradient(ellipse 80% 55% at 10% 0%,rgba(34,197,94,.14) 0%,transparent 65%),
+    radial-gradient(ellipse 70% 45% at 90% 100%,rgba(6,182,212,.10) 0%,transparent 65%),
+    radial-gradient(ellipse 60% 40% at 50% 40%,rgba(34,197,94,.05) 0%,transparent 70%);
+}
+body.dark-theme .bg-layer::after{
+  background-image:radial-gradient(circle,rgba(134,239,172,.16) 1px,transparent 1px);
+  opacity:.35;
+}
+body.dark-theme .creator-tag{
+  color:#f0fff7;
+  box-shadow:0 10px 28px rgba(34,197,94,.16),0 0 0 1px rgba(74,222,128,.22) inset;
+}
+body.dark-theme .nav-tabs,
+body.dark-theme .info-card,
+body.dark-theme .q-card,
+body.dark-theme .puzzle-card,
+body.dark-theme .compiler-wrap,
+body.dark-theme .summary-card,
+body.dark-theme .essay-card,
+body.dark-theme .score-bar,
+body.dark-theme .stat-box{
+  background:linear-gradient(180deg,rgba(8,20,36,.95),rgba(6,15,28,.93));
+  border-color:rgba(74,222,128,.22);
+}
+body.dark-theme .nav-tab,
+body.dark-theme .unit-tab,
+body.dark-theme .pill,
+body.dark-theme .score-label,
+body.dark-theme .stat-label,
+body.dark-theme .expl-text,
+body.dark-theme .sec-header p,
+body.dark-theme .block-hint,
+body.dark-theme .compiler-note,
+body.dark-theme .template-strip span,
+body.dark-theme .tpl-btn{
+  color:#b7eecd;
+}
+body.dark-theme .opt-letter{color:#c8f5d9}
+body.dark-theme .output-area{background:rgba(16,31,54,.72);color:#dfffee}
+body.dark-theme .code-editor{color:#dfffee}
+body.dark-theme .drop-placeholder{color:#c4e7d3}
+ 
+/* Nav */
+.nav-tabs{display:flex;gap:4px;margin-bottom:2rem;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:5px;flex-wrap:wrap;box-shadow:var(--card-shadow)}
+.nav-tab{flex:1;min-width:80px;padding:10px 6px;border-radius:13px;border:none;background:transparent;
+  color:#4b7c5e;font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .25s;text-align:center;white-space:nowrap}
+.nav-tab.active{background:linear-gradient(135deg,var(--accent),#15803d);color:#fff;box-shadow:0 4px 16px rgba(22,163,74,.35)}
+.nav-tab:hover:not(.active){background:rgba(34,197,94,.09);color:var(--accent)}
+ 
+/* Panel */
+.panel{display:none}.panel.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+ 
+/* Sec header */
+.sec-header{margin-bottom:1.5rem}
+.sec-header h2{font-family:'Tajawal',sans-serif;font-size:clamp(1.3rem,3.5vw,1.8rem);font-weight:800;
+  background:linear-gradient(135deg,var(--dark) 0%,var(--accent) 60%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem}
+.sec-header p{color:#4b7c5e;font-size:13px}
+ 
+/* Unit sub-tabs */
+.unit-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.4rem}
+.unit-tab{padding:8px 15px;border-radius:25px;border:1px solid var(--border);background:transparent;
+  color:#4b7c5e;font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .22s}
+.unit-tab.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(22,163,74,.3)}
+.unit-tab:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.unit-content{display:none}.unit-content.active{display:block;animation:fadeUp .3s ease}
+ 
+/* Info Card */
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.4rem;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:var(--card-shadow)}
+.info-card::before{content:'';position:absolute;top:-20px;right:-20px;width:120px;height:120px;
+  background:radial-gradient(circle,rgba(34,197,94,.07),transparent 70%);pointer-events:none}
+.card-title{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;display:flex;align-items:center;gap:7px}
+.card-title .icon{font-size:15px}
+.card-text{font-size:14px;line-height:1.95;color:var(--text)}
+.card-text code{font-family:'JetBrains Mono',monospace;background:rgba(34,197,94,.1);color:var(--accent4);padding:2px 7px;border-radius:6px;font-size:12.5px;border:1px solid rgba(34,197,94,.2)}
+.highlight-box{background:var(--surface2);border-left:3px solid var(--accent);border-radius:10px;padding:.9rem 1.1rem;margin:.8rem 0;font-size:13.5px;color:var(--text)}
+.key-terms{display:flex;flex-wrap:wrap;gap:8px;margin:.8rem 0}
+.term{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:var(--accent4);padding:5px 13px;border-radius:20px;font-size:12.5px;font-weight:600}
+.timeline{margin:.8rem 0}
+.tl-item{display:flex;gap:14px;margin-bottom:.9rem;align-items:flex-start}
+.tl-year{background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;white-space:nowrap;min-width:54px;text-align:center;margin-top:2px}
+.tl-text{font-size:13.5px;line-height:1.7;color:var(--text);flex:1}
+ 
+/* Q card */
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.4rem;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:var(--card-shadow)}
+.q-card::before{content:'';position:absolute;top:-30px;left:-30px;width:160px;height:160px;
+  background:radial-gradient(circle,rgba(34,197,94,.05),transparent 70%);pointer-events:none}
+.q-meta{display:flex;align-items:center;gap:8px;margin-bottom:.8rem;flex-wrap:wrap}
+.q-num{background:rgba(22,163,74,.13);color:var(--accent);font-size:12px;font-weight:700;padding:3px 12px;border-radius:10px}
+.q-text{font-size:15px;line-height:1.85;color:var(--text);font-weight:500;margin-bottom:1.1rem}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:11px;padding:11px 15px;border-radius:13px;
+  border:1px solid var(--border);background:var(--surface2);color:var(--text);
+  font-family:'Cairo',sans-serif;font-size:13.5px;cursor:pointer;transition:all .2s;text-align:left;width:100%}
+.opt:hover:not(:disabled){border-color:var(--accent);background:rgba(34,197,94,.08);transform:translateX(4px)}
+.opt-letter{width:30px;height:30px;border-radius:9px;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;transition:all .2s;color:#4b7c5e}
+.opt:hover:not(:disabled) .opt-letter{border-color:var(--accent);color:var(--accent);background:rgba(34,197,94,.1)}
+.opt.correct{border-color:var(--green)!important;background:rgba(22,163,74,.1)!important;color:var(--green)!important;cursor:default}
+.opt.correct .opt-letter{background:var(--accent);border-color:var(--accent);color:#fff}
+.opt.wrong{border-color:var(--red)!important;background:rgba(239,68,68,.1)!important;color:var(--red)!important;cursor:default}
+.opt.wrong .opt-letter{background:var(--red);border-color:var(--red);color:#fff}
+.opt.reveal{border-color:var(--green)!important;background:rgba(34,197,94,.07)!important;color:var(--green)!important;cursor:default;opacity:.7}
+.opt.reveal .opt-letter{background:var(--accent);border-color:var(--accent);color:#fff}
+.opt:disabled{cursor:default}
+.feedback{margin-top:10px;padding:10px 14px;border-radius:12px;font-size:13.5px;font-weight:600;display:none}
+.feedback.show{display:flex;align-items:flex-start;gap:8px;flex-direction:column}
+.feedback.correct-fb{background:rgba(22,163,74,.1);border:1px solid rgba(34,197,94,.3);color:var(--green)}
+.feedback.wrong-fb{background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.25);color:var(--red)}
+.expl-text{font-size:12.5px;font-weight:400;color:#4b7c5e;margin-top:4px}
+ 
+/* ═══ NEW QUIZ SYSTEM ═══ */
+/* Category grid */
+.qcat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-bottom:1.1rem}
+.qcat-card{background:var(--surface);border:1.5px solid var(--border);border-radius:18px;padding:1rem 1.1rem;
+  cursor:pointer;transition:all .22s;position:relative;overflow:hidden;text-align:center}
+.qcat-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(34,197,94,.13)}
+.qcat-card.active{border-color:var(--accent);background:rgba(34,197,94,.07);box-shadow:0 4px 18px rgba(34,197,94,.2)}
+.qcat-icon{font-size:1.8rem;margin-bottom:.4rem}
+.qcat-name{font-size:13.5px;font-weight:800;color:var(--text);margin-bottom:.2rem}
+.qcat-sub{font-size:11.5px;color:#4b7c5e}
+.qcat-dot{position:absolute;top:10px;right:10px;width:8px;height:8px;border-radius:50%;
+  background:rgba(34,197,94,.3);transition:all .2s}
+.qcat-card.active .qcat-dot{background:var(--accent);box-shadow:0 0 8px rgba(34,197,94,.7)}
+ 
+/* Controls bar */
+.qctrl-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:1rem}
+.qshuf-btn{padding:8px 16px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);
+  color:var(--text);font-family:'Cairo',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .2s}
+.qshuf-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(34,197,94,.06)}
+.qmode-pills{display:flex;gap:6px;margin-left:auto}
+.qmode-pill{padding:8px 16px;border-radius:20px;border:1.5px solid var(--border);background:transparent;
+  color:#4b7c5e;font-family:'Cairo',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .2s}
+.qmode-pill.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 3px 12px rgba(34,197,94,.35)}
+.qmode-pill:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+ 
+/* Progress bar */
+.qprog-wrap{margin-bottom:1rem}
+.qprog-meta{display:flex;justify-content:space-between;margin-bottom:.45rem}
+.qprog-meta span{font-size:13px;font-weight:700;color:var(--text)}
+.qprog-track{height:7px;background:rgba(34,197,94,.13);border-radius:10px;overflow:hidden}
+.qprog-fill{height:100%;background:linear-gradient(90deg,var(--accent4),var(--accent3));border-radius:10px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+ 
+/* Active question card */
+.qcard{background:var(--surface);border:1.5px solid rgba(34,197,94,.22);border-radius:20px;
+  padding:1.5rem;box-shadow:0 4px 22px rgba(34,197,94,.09);animation:fadeUp .28s ease}
+.qcard-meta{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:1rem;direction:rtl}
+.qcard-num{background:var(--accent);color:#fff;font-size:12px;font-weight:800;padding:4px 14px;border-radius:10px}
+.qcard-type{border:1.5px solid rgba(34,197,94,.35);color:var(--text);font-size:12px;font-weight:600;
+  padding:4px 12px;border-radius:10px;background:transparent}
+.qcard-text{font-size:15px;line-height:1.9;color:var(--text);font-weight:500;margin-bottom:1.2rem;
+  text-align:right;direction:rtl}
+.qcard-opts{display:flex;flex-direction:column;gap:9px}
+.qcard-opt{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:13px 15px;
+  border-radius:14px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);
+  font-family:'Cairo',sans-serif;font-size:13.5px;cursor:pointer;transition:all .2s;
+  text-align:right;width:100%;direction:rtl}
+.qcard-opt:hover:not(:disabled){border-color:var(--border2);background:rgba(34,197,94,.06);transform:translateX(-3px)}
+.qcard-letter{width:32px;height:32px;border-radius:10px;border:1.5px solid rgba(34,197,94,.3);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;
+  flex-shrink:0;transition:all .2s;color:var(--accent);background:rgba(34,197,94,.07)}
+.qcard-opt:hover:not(:disabled) .qcard-letter{background:var(--accent);border-color:var(--accent);color:#fff}
+.qcard-opt.q-correct{border-color:#22c55e!important;background:rgba(34,197,94,.1)!important;color:#16a34a!important;cursor:default}
+.qcard-opt.q-correct .qcard-letter{background:#16a34a;border-color:#16a34a;color:#fff}
+.qcard-opt.q-wrong{border-color:#e53e3e!important;background:rgba(229,62,62,.1)!important;color:#e53e3e!important;cursor:default}
+.qcard-opt.q-wrong .qcard-letter{background:#e53e3e;border-color:#e53e3e;color:#fff}
+.qcard-opt.q-reveal{border-color:#22c55e!important;background:rgba(34,197,94,.07)!important;color:#16a34a!important;cursor:default;opacity:.8}
+.qcard-opt.q-reveal .qcard-letter{background:#16a34a;border-color:#16a34a;color:#fff}
+.qcard-opt:disabled{cursor:default}
+.qcard-fb{margin-top:11px;padding:11px 14px;border-radius:12px;font-size:13.5px;font-weight:700;
+  display:none;direction:rtl;text-align:right}
+.qcard-fb.show{display:flex;flex-direction:column;gap:4px}
+.qcard-fb.q-cfb{background:rgba(34,197,94,.08);border:1.5px solid rgba(34,197,94,.3);color:#16a34a}
+.qcard-fb.q-wfb{background:rgba(229,62,62,.08);border:1.5px solid rgba(229,62,62,.28);color:#e53e3e}
+.qcard-expl{font-size:12.5px;font-weight:400;color:#4b7c5e;margin-top:3px}
+ 
+/* Wrong answer badge */
+.q-wrong-badge{display:flex;align-items:center;justify-content:flex-end;gap:6px;
+  padding:9px 14px;border-radius:12px;margin-top:10px;
+  background:rgba(34,197,94,.07);border:1.5px solid rgba(34,197,94,.25);
+  color:var(--accent);font-size:13px;font-weight:700;direction:rtl}
+ 
+/* Next button */
+.qcard-next{margin-top:13px;width:100%;padding:13px;border-radius:14px;border:none;
+  background:linear-gradient(135deg,var(--accent4),var(--accent));color:#fff;font-family:'Cairo',sans-serif;
+  font-size:14px;font-weight:800;cursor:pointer;transition:all .22s;display:none;
+  box-shadow:0 4px 14px rgba(34,197,94,.3)}
+.qcard-next:hover{transform:translateY(-1px);box-shadow:0 7px 20px rgba(34,197,94,.4)}
+ 
+/* Result */
+.qres-card{background:var(--surface);border:1.5px solid rgba(34,197,94,.2);border-radius:24px;
+  padding:2.4rem 1.8rem;text-align:center;max-width:460px;margin:0 auto;
+  box-shadow:0 8px 30px rgba(34,197,94,.1);animation:fadeUp .4s ease}
+.qres-emoji{font-size:50px;margin-bottom:.7rem}
+.qres-title{font-family:'Tajawal',sans-serif;font-size:1.85rem;font-weight:900;color:var(--text);margin-bottom:1.3rem}
+.qres-circle-wrap{position:relative;width:140px;height:140px;margin:0 auto 1.3rem}
+.qres-svg{width:140px;height:140px}
+#qres-circle{transition:stroke-dashoffset 1.1s cubic-bezier(.4,0,.2,1)}
+.qres-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.qres-frac{font-family:'Tajawal',sans-serif;font-size:1.6rem;font-weight:900;color:var(--accent)}
+.qres-pct{font-size:13px;font-weight:600;color:#4b7c5e;margin-top:2px}
+.qres-msg{font-size:14px;color:var(--text);margin-bottom:1.5rem;line-height:1.7}
+.qres-retry-btn{padding:13px 38px;border-radius:14px;border:none;
+  background:linear-gradient(135deg,var(--accent4),var(--accent));color:#fff;font-family:'Cairo',sans-serif;
+  font-size:14px;font-weight:800;cursor:pointer;transition:all .25s;box-shadow:0 5px 18px rgba(34,197,94,.35)}
+.qres-retry-btn:hover{transform:translateY(-2px);box-shadow:0 9px 26px rgba(34,197,94,.45)}
+ 
+/* Idle */
+.qidle-box{background:var(--surface);border:1.5px dashed var(--border);border-radius:20px;
+  padding:2.5rem 1.5rem;text-align:center;margin-top:.5rem}
+.qstart-go{padding:12px 36px;border-radius:14px;border:none;
+  background:linear-gradient(135deg,var(--accent4),var(--accent));color:#fff;font-family:'Cairo',sans-serif;
+  font-size:14px;font-weight:800;cursor:pointer;transition:all .22s;box-shadow:0 4px 16px rgba(34,197,94,.3)}
+.qstart-go:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(34,197,94,.4)}
+ 
+/* Parent context block for sub-questions */
+.quiz-parent-ctx{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.22);border-radius:10px;
+  padding:8px 13px;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--accent4);line-height:1.7;direction:ltr;text-align:left}
+ 
+/* keep old pill/score-bar for other panels */
+.quiz-controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center}
+.pill{padding:7px 16px;border-radius:20px;border:1px solid var(--border);background:transparent;
+  color:#4b7c5e;font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.pill.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.pill:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.reset-quiz-btn{padding:7px 16px;border-radius:20px;border:1px solid rgba(239,68,68,.4);background:transparent;
+  color:var(--red);font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;margin-left:auto}
+.reset-quiz-btn:hover{background:rgba(239,68,68,.1);border-color:var(--red);transform:scale(1.03)}
+.score-bar{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 18px;
+  display:flex;align-items:center;gap:14px;margin-bottom:1.5rem;box-shadow:var(--card-shadow);flex-wrap:wrap}
+.score-label{font-size:12px;color:#4b7c5e;font-weight:600}
+.score-val{font-size:22px;font-weight:800;color:var(--accent);font-family:'Tajawal',sans-serif}
+.score-prog{flex:1;height:8px;background:var(--surface3);border-radius:10px;overflow:hidden;min-width:100px}
+.score-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent3));border-radius:10px;transition:width .4s}
+ 
+/* ═══ PUZZLE PAGE ═══ */
+.puzzle-card{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--card-shadow)}
+.puzzle-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:1.2rem;line-height:1.7}
+.puzzle-q code{font-family:'JetBrains Mono',monospace;background:rgba(34,197,94,.1);color:var(--accent4);padding:2px 7px;border-radius:6px;font-size:12.5px}
+.puzzle-area{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:1.1rem}
+.blocks-pool{flex:1;min-width:220px}
+.drop-zone{flex:1.4;min-width:220px}
+.blocks-pool-title,.drop-zone-title{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.09em;margin-bottom:.6rem;display:flex;align-items:center;gap:6px}
+.pool-list{display:flex;flex-direction:column;gap:6px;min-height:60px}
+.drop-list{display:flex;flex-direction:column;gap:6px;min-height:80px;background:rgba(34,197,94,.04);border:2px dashed rgba(34,197,94,.2);border-radius:14px;padding:10px;transition:all .2s}
+.drop-list.drag-over{background:rgba(34,197,94,.09);border-color:var(--accent)}
+.block{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  background:var(--surface);border:1.5px solid var(--border2);border-radius:12px;
+  padding:9px 13px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--dark);
+  cursor:grab;transition:all .2s;user-select:none;box-shadow:0 2px 8px rgba(34,197,94,.08)}
+.block:active{cursor:grabbing;transform:scale(.97)}
+.block:hover{border-color:var(--accent);background:rgba(34,197,94,.06)}
+.block.dragging{opacity:.4}
+.block .line-num{font-size:10px;color:#999;font-family:'Cairo',sans-serif;background:rgba(34,197,94,.07);padding:1px 6px;border-radius:5px;flex-shrink:0}
+.block .hint-btn{background:none;border:none;color:var(--accent);font-size:13px;padding:2px 5px;border-radius:6px;transition:all .2s}
+.block .hint-btn:hover{background:rgba(34,197,94,.12)}
+.block-hint{font-size:11px;color:#4b7c5e;font-family:'Cairo',sans-serif;margin-top:3px;padding:5px 10px;background:rgba(34,197,94,.07);border-radius:8px;display:none;text-align:right;direction:rtl}
+.block-hint.show{display:block}
+.drop-placeholder{text-align:center;color:#aaa;font-size:13px;padding:10px;font-family:'Cairo',sans-serif}
+.puzzle-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.check-puzzle-btn{padding:10px 24px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--accent),#15803d);color:#fff;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;transition:all .2s}
+.check-puzzle-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(22,163,74,.3)}
+.reset-puzzle-btn{padding:10px 18px;border-radius:12px;border:1px solid var(--border);background:transparent;color:#4b7c5e;font-family:'Cairo',sans-serif;font-size:13px;font-weight:600;transition:all .2s}
+.reset-puzzle-btn:hover{border-color:var(--red);color:var(--red)}
+.puzzle-result{margin-top:.8rem;padding:10px 15px;border-radius:12px;font-size:13.5px;font-weight:600;display:none}
+.puzzle-result.show{display:block}
+.puzzle-result.correct-fb{background:rgba(22,163,74,.1);border:1px solid rgba(34,197,94,.3);color:var(--green)}
+.puzzle-result.wrong-fb{background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.25);color:var(--red)}
+.drop-item{display:flex;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--border2);border-radius:12px;padding:9px 13px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--dark);cursor:pointer;transition:all .2s;user-select:none}
+.drop-item:hover{border-color:var(--red);background:rgba(239,68,68,.05)}
+.drop-item .remove-btn{margin-left:auto;color:var(--red);font-size:12px;background:none;border:none;padding:2px 5px;border-radius:6px}
+.drop-item .line-badge{background:rgba(34,197,94,.12);color:var(--accent);font-size:10px;font-family:'Cairo',sans-serif;padding:1px 7px;border-radius:6px;flex-shrink:0}
+ 
+/* ═══ COMPILER PAGE ═══ */
+.compiler-wrap{background:var(--surface);border:1px solid var(--border);border-radius:22px;overflow:hidden;box-shadow:var(--card-shadow)}
+.compiler-header{background:linear-gradient(135deg,var(--dark),#166534);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.compiler-header h3{font-family:'Tajawal',sans-serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
+.compiler-actions{display:flex;gap:8px;align-items:center}
+.run-btn{padding:8px 22px;border-radius:10px;border:none;background:var(--accent2);color:#fff;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;transition:all .2s;display:flex;align-items:center;gap:6px}
+.run-btn:hover{background:#86efac;transform:scale(1.03)}
+.clear-btn{padding:8px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.3);background:transparent;color:rgba(255,255,255,.8);font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;transition:all .2s}
+.clear-btn:hover{background:rgba(255,255,255,.1);color:#fff}
+.compiler-body{display:grid;grid-template-columns:1fr 1fr;min-height:380px}
+@media(max-width:620px){.compiler-body{grid-template-columns:1fr}}
+.editor-pane,.output-pane{display:flex;flex-direction:column}
+.pane-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--accent);padding:10px 16px;background:rgba(34,197,94,.05);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.code-editor{flex:1;padding:16px;font-family:'JetBrains Mono',monospace;font-size:12.5px;
+  color:var(--dark);background:transparent;border:none;outline:none;resize:none;line-height:1.8;
+  border-right:1px solid var(--border)}
+.output-area{flex:1;padding:16px;font-family:'JetBrains Mono',monospace;font-size:12.5px;
+  color:var(--dark);background:rgba(34,197,94,.03);white-space:pre-wrap;line-height:1.8;overflow-y:auto}
+.output-area.error-out{color:var(--red)}
+.compiler-note{padding:10px 16px;background:rgba(34,197,94,.05);border-top:1px solid var(--border);font-size:12px;color:#4b7c5e;text-align:center}
+.template-strip{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.template-strip span{font-size:11px;font-weight:600;color:#4b7c5e;text-transform:uppercase}
+.tpl-btn{padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:#4b7c5e;font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.tpl-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(34,197,94,.07)}
+ 
+/* Cards grid for units */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:1.4rem}
+.summary-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.2rem;box-shadow:var(--card-shadow);position:relative;overflow:hidden}
+.summary-card::after{content:'';position:absolute;bottom:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(34,197,94,.07),transparent 70%)}
+.summary-card-icon{font-size:26px;margin-bottom:.5rem}
+.summary-card-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:.4rem}
+.summary-card-text{font-size:13px;line-height:1.75;color:var(--text)}
+ 
+/* Essay section */
+.essay-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.4rem;margin-bottom:1rem;box-shadow:var(--card-shadow)}
+.essay-q{font-size:14.5px;font-weight:600;color:var(--text);margin-bottom:.8rem;display:flex;gap:10px;align-items:flex-start}
+.essay-num{background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:8px;flex-shrink:0;margin-top:2px}
+.essay-toggle{padding:8px 18px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--accent);font-family:'Cairo',sans-serif;font-size:12.5px;font-weight:600;transition:all .2s}
+.essay-toggle:hover{background:rgba(34,197,94,.08);border-color:var(--accent)}
+.essay-answer{display:none;margin-top:10px;background:rgba(34,197,94,.06);border-radius:12px;padding:1rem;font-size:13.5px;line-height:1.9;color:var(--text)}
+.essay-answer.show{display:block;animation:fadeUp .2s ease}
+ 
+/* Quiz stats */
+.quiz-stat-row{display:flex;gap:10px;margin-bottom:1.2rem;flex-wrap:wrap}
+.stat-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 16px;text-align:center;flex:1;min-width:90px;box-shadow:var(--card-shadow)}
+.stat-num{font-size:22px;font-weight:800;color:var(--accent);font-family:'Tajawal',sans-serif}
+.stat-label{font-size:11px;color:#4b7c5e;margin-top:2px}
+ 
+/* Question bank */
+.bank-section{margin-bottom:1.5rem}
+.bank-title{font-size:16px;font-weight:800;color:var(--accent);margin-bottom:.8rem}
+.bank-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1rem;margin-bottom:.8rem;box-shadow:var(--card-shadow)}
+.bank-q{font-size:14px;font-weight:700;color:var(--text);margin-bottom:.6rem;line-height:1.8}
+.bank-opt{font-size:13px;color:#4b7c5e;padding:5px 0}
+.bank-opt.correct{color:var(--green);font-weight:700}
+.bank-expl{margin-top:.6rem;padding:.65rem .8rem;border-radius:10px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.22);font-size:12.8px;color:var(--text)}
+.bank-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
+.bank-pill{padding:8px 16px;border-radius:999px;border:1px solid var(--border);background:transparent;color:#4b7c5e;font-size:12.5px;font-weight:700;transition:all .2s}
+.bank-pill:hover{border-color:var(--accent);color:var(--accent)}
+.bank-pill.active{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 6px 18px rgba(22,163,74,.25)}
+ 
+/* Code page */
+.code-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1rem 1.1rem;margin-bottom:1rem;box-shadow:var(--card-shadow)}
+.code-head{font-size:15px;font-weight:800;color:var(--accent);margin-bottom:.5rem}
+.code-desc{font-size:13px;line-height:1.8;color:var(--text);margin-bottom:.75rem}
+.code-points{margin:0 0 .8rem 0;padding-left:1rem}
+.code-points li{font-size:12.8px;line-height:1.7;color:#4b7c5e;margin-bottom:.25rem}
+.code-block{background:rgba(3,12,25,.88);color:#d1fae5;border:1px solid rgba(34,197,94,.25);border-radius:12px;padding:.9rem;overflow:auto;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+<div class="container">
+  <div class="top-controls">
+    <button id="theme-toggle-btn" class="theme-toggle-btn" onclick="toggleTheme()">
+      <span id="theme-toggle-icon" class="theme-toggle-icon">◐</span>
+      <span id="theme-toggle-label">Dark Mode</span>
+    </button>
+  </div>
+ 
+  <div class="creator-tag-wrap">
+    <div class="creator-tag">
+      <span class="dot"></span>
+      BY DRAGON_LOL
+    </div>
+  </div>
+ 
+  <div class="site-header">
+    <div class="badge">💻 Academic Study Tool</div>
+    <h1>Computer Technology</h1>
+    <p>Chapter Notes · Quiz · Code Puzzles · Compiler</p>
+  </div>
+ 
+  <!-- NAV -->
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchPanel('unit1',this)">📘 Unit 1</button>
+    <button class="nav-tab" onclick="switchPanel('unit2',this)">📗 Unit 2</button>
+    <button class="nav-tab" onclick="switchPanel('unit3',this)">📙 Unit 3</button>
+    <button class="nav-tab" onclick="switchPanel('quiz',this)">🧠 Quiz</button>
+    <button class="nav-tab" onclick="switchPanel('bank',this)">📚 Question Bank</button>
+    <button class="nav-tab" onclick="switchPanel('code',this)">🧾 Code</button>
+    <button class="nav-tab" onclick="switchPanel('puzzle',this)">🧩 Code Puzzle</button>
+    <button class="nav-tab" onclick="switchPanel('compiler',this)">⚙️ Compiler</button>
+  </div>
+ 
+  <!-- ═══════════ UNIT 1 ═══════════ -->
+  <div id="panel-unit1" class="panel active">
+    <div class="sec-header">
+      <h2>Unit 1 — History & Fundamentals of Computers</h2>
+      <p>From the abacus to modern CPUs — the full story</p>
+    </div>
+ 
+    <div class="unit-tabs">
+      <button class="unit-tab active" onclick="switchUnit('u1-history',this,'unit1')">📅 History</button>
+      <button class="unit-tab" onclick="switchUnit('u1-components',this,'unit1')">🖥️ Components</button>
+      <button class="unit-tab" onclick="switchUnit('u1-software',this,'unit1')">💿 Software</button>
+      <button class="unit-tab" onclick="switchUnit('u1-binary',this,'unit1')">🔢 Binary & Data</button>
+      <button class="unit-tab" onclick="switchUnit('u1-essay',this,'unit1')">✍️ Essay Q&A</button>
+    </div>
+ 
+    <!-- History -->
+    <div id="u1-history" class="unit-content active">
+      <div class="info-card">
+        <div class="card-title"><span class="icon">📅</span>Timeline of Computing</div>
+        <div class="timeline">
+          <div class="tl-item"><span class="tl-year">~3000 BC</span><div class="tl-text"><strong>Abacus</strong> — the first device known to perform calculations using sliding beads.</div></div>
+          <div class="tl-item"><span class="tl-year">1642</span><div class="tl-text"><strong>Pascaline</strong> — Blaise Pascal developed the first mechanical calculator.</div></div>
+          <div class="tl-item"><span class="tl-year">1801</span><div class="tl-text"><strong>Punched Cards</strong> — Joseph Jacquard introduced punched cards to control weaving machines.</div></div>
+          <div class="tl-item"><span class="tl-year">1820s</span><div class="tl-text"><strong>Difference Engine &amp; Analytical Engine</strong> — Charles Babbage designed both; considered father of computers.</div></div>
+          <div class="tl-item"><span class="tl-year">1840s</span><div class="tl-text"><strong>Ada Lovelace</strong> — wrote algorithms for Babbage's engine; considered the <em>first computer programmer</em>.</div></div>
+          <div class="tl-item"><span class="tl-year">1890</span><div class="tl-text"><strong>Herman Hollerith</strong> — developed a machine to process census data; company eventually became <strong>IBM</strong>.</div></div>
+          <div class="tl-item"><span class="tl-year">1946</span><div class="tl-text"><strong>ENIAC</strong> — one of the first fully electronic computers, used vacuum tubes.</div></div>
+          <div class="tl-item"><span class="tl-year">1950s</span><div class="tl-text"><strong>Von Neumann Architecture</strong> — John von Neumann introduced storing both data and instructions in memory.</div></div>
+          <div class="tl-item"><span class="tl-year">1950s</span><div class="tl-text"><strong>Transistors</strong> — replaced vacuum tubes; made computers smaller, faster, and more reliable.</div></div>
+          <div class="tl-item"><span class="tl-year">1950s</span><div class="tl-text"><strong>FORTRAN &amp; COBOL</strong> — first high-level programming languages emerged.</div></div>
+        </div>
+      </div>
+      <div class="cards-grid">
+        <div class="summary-card"><div class="summary-card-icon">🧮</div><div class="summary-card-title">Abacus</div><div class="summary-card-text">First calculation device. Used sliding beads on rods. Still used in some cultures today.</div></div>
+        <div class="summary-card"><div class="summary-card-icon">⚙️</div><div class="summary-card-title">Pascaline</div><div class="summary-card-text">1642 mechanical calculator by Blaise Pascal. Could add and subtract automatically.</div></div>
+        <div class="summary-card"><div class="summary-card-icon">📇</div><div class="summary-card-title">Punched Cards</div><div class="summary-card-text">Jacquard's 1801 invention to automate looms. Later used to program early computers.</div></div>
+        <div class="summary-card"><div class="summary-card-icon">💡</div><div class="summary-card-title">ENIAC (1946)</div><div class="summary-card-text">18,000 vacuum tubes. First general-purpose electronic computer. Weighed 30 tons.</div></div>
+      </div>
+    </div>
+ 
+    <!-- Components -->
+    <div id="u1-components" class="unit-content">
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🖥️</span>Basic Computer Operations</div>
+        <div class="card-text">
+          Every computer performs four basic operations:<br><br>
+          <strong>1. Input</strong> — Receiving data from input devices (keyboard, mouse).<br>
+          <strong>2. Processing</strong> — Performing arithmetic and logical operations (CPU).<br>
+          <strong>3. Output</strong> — Displaying/printing results (monitor, printer).<br>
+          <strong>4. Storage</strong> — Saving data for later use (RAM, HDD, flash drive).
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🧠</span>Central Processing Unit (CPU)</div>
+        <div class="card-text">
+          The <strong>CPU</strong> is the brain of the computer. Its primary function is to perform arithmetic and logical operations. It fetches instructions from RAM, decodes them, executes them, and stores results.
+        </div>
+        <div class="highlight-box">The CPU cannot work directly on data stored in Secondary Storage — data must first be loaded into <strong>RAM</strong> (Main Memory).</div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">💾</span>Memory Types</div>
+        <div class="cards-grid" style="margin:.8rem 0 0">
+          <div class="summary-card">
+            <div class="summary-card-icon">⚡</div>
+            <div class="summary-card-title">Main Memory (RAM)</div>
+            <div class="summary-card-text">Temporary, fast storage. Holds programs/data during execution. Each cell has a unique address. <strong>Lost when power is off.</strong></div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-card-icon">💿</div>
+            <div class="summary-card-title">Secondary Storage</div>
+            <div class="summary-card-text">Permanent storage. Flash drives, CDs, DVDs, hard disks. Data is <strong>kept when power is off.</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">⌨️</span>Input &amp; Output Devices</div>
+        <div class="card-text">
+          <strong>Input Devices:</strong> Keyboard, Mouse — feed data into the computer.<br>
+          <strong>Output Devices:</strong> Monitor, Printer — display or produce results from the computer.
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Software -->
+    <div id="u1-software" class="unit-content">
+      <div class="info-card">
+        <div class="card-title"><span class="icon">💿</span>System Programs vs Application Programs</div>
+        <div class="card-text">
+          <strong>System Programs (System Software):</strong> Control and manage the computer's hardware and basic operations. The most important system program is the <strong>Operating System (OS)</strong>.
+          <div class="highlight-box">The <strong>Operating System</strong> is the first program to load when you turn on your PC. It controls the computer, manages all system activities, and runs application programs.</div>
+          <strong>Application Programs:</strong> Programs designed for specific tasks that the user wants to perform. Examples: Word Processor, Spreadsheet, Web Browser, Games.
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🔧</span>Role of the Operating System</div>
+        <div class="card-text">
+          The OS acts as the bridge between the user, application programs, and hardware. Responsibilities include:<br><br>
+          • Managing memory (RAM allocation)<br>
+          • Managing input/output devices<br>
+          • Running and scheduling application programs<br>
+          • Handling file storage on secondary storage<br>
+          • Providing the user interface (desktop, taskbar, etc.)
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Binary -->
+    <div id="u1-binary" class="unit-content">
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🔢</span>Binary Numbers</div>
+        <div class="card-text">
+          A <strong>binary number</strong> is a number composed of only <code>0</code>s and <code>1</code>s.<br><br>
+          Computers use binary because their circuits have two states: <strong>ON (1)</strong> and <strong>OFF (0)</strong>.<br><br>
+          All data inside a computer — text, images, numbers, sound — is stored as binary digits (<strong>bits</strong>).
+        </div>
+        <div class="highlight-box">
+          <strong>Bit</strong> = 1 binary digit (0 or 1)<br>
+          <strong>Byte</strong> = 8 bits<br>
+          <strong>Kilobyte (KB)</strong> = 1024 bytes<br>
+          <strong>Megabyte (MB)</strong> = 1024 KB
+        </div>
+      </div>
+      <div class="key-terms">
+        <span class="term">Bit</span><span class="term">Byte</span><span class="term">Binary</span>
+        <span class="term">0s and 1s</span><span class="term">ON/OFF states</span><span class="term">Memory address</span>
+      </div>
+    </div>
+ 
+    <!-- Essay -->
+    <div id="u1-essay" class="unit-content">
+      <div class="sec-header" style="margin-bottom:1rem"><p>Click "Show Answer" to reveal model answers</p></div>
+      <div class="essay-card">
+        <div class="essay-q"><span class="essay-num">1</span>Define system programs and explain the role of the operating system.</div>
+        <button class="essay-toggle" onclick="toggleEssay(this)">📖 Show Answer</button>
+        <div class="essay-answer">
+          <strong>System programs</strong> (system software) are programs that control and manage the computer's hardware and provide an environment for running application programs. The most important system program is the <strong>Operating System (OS)</strong>.<br><br>
+          The <strong>Operating System</strong> is the first program loaded when the computer starts. Its roles include:<br>
+          • Controlling all hardware components<br>
+          • Managing main memory (RAM) allocation<br>
+          • Scheduling and running application programs<br>
+          • Handling input/output devices<br>
+          • Managing file storage on secondary storage<br>
+          • Providing a user interface
+        </div>
+      </div>
+      <div class="essay-card">
+        <div class="essay-q"><span class="essay-num">2</span>Compare Main Memory (RAM) and Secondary Storage based on their characteristics and purposes.</div>
+        <button class="essay-toggle" onclick="toggleEssay(this)">📖 Show Answer</button>
+        <div class="essay-answer">
+          <strong>Main Memory (RAM):</strong><br>
+          • Temporary — data is lost when power is off<br>
+          • Fast — directly accessible by the CPU<br>
+          • Limited capacity<br>
+          • Used to hold programs and data during execution<br>
+          • Each cell has a unique address<br><br>
+          <strong>Secondary Storage:</strong><br>
+          • Permanent — data is retained when power is off<br>
+          • Slower than RAM<br>
+          • Large capacity<br>
+          • Used to store programs and data long-term<br>
+          • Examples: Flash drives, CDs, DVDs, hard disks
+        </div>
+      </div>
+      <div class="essay-card">
+        <div class="essay-q"><span class="essay-num">3</span>Mention the main basic operations a computer can perform.</div>
+        <button class="essay-toggle" onclick="toggleEssay(this)">📖 Show Answer</button>
+        <div class="essay-answer">
+          A computer performs four basic operations:<br><br>
+          1. <strong>Input</strong> — Receiving data from input devices (e.g., keyboard, mouse).<br>
+          2. <strong>Processing</strong> — Performing arithmetic and logical operations using the CPU.<br>
+          3. <strong>Output</strong> — Displaying or producing results via output devices (e.g., monitor, printer).<br>
+          4. <strong>Storage</strong> — Saving data permanently using secondary storage devices.
+        </div>
+      </div>
+    </div>
+  </div><!-- /unit1 -->
+ 
+  <!-- ═══════════ UNIT 2 ═══════════ -->
+  <div id="panel-unit2" class="panel">
+    <div class="sec-header">
+      <h2>Unit 2 — Introduction to C++</h2>
+      <p>Syntax, data types, variables, operators, and strings</p>
+    </div>
+ 
+    <div class="unit-tabs">
+      <button class="unit-tab active" onclick="switchUnit('u2-basics',this,'unit2')">🔤 Basics</button>
+      <button class="unit-tab" onclick="switchUnit('u2-datatypes',this,'unit2')">📊 Data Types</button>
+      <button class="unit-tab" onclick="switchUnit('u2-operators',this,'unit2')">➕ Operators</button>
+      <button class="unit-tab" onclick="switchUnit('u2-strings',this,'unit2')">💬 Strings</button>
+      <button class="unit-tab" onclick="switchUnit('u2-arrays',this,'unit2')">📋 Arrays</button>
+    </div>
+ 
+    <div id="u2-basics" class="unit-content active">
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🏗️</span>C++ Program Structure</div>
+        <div class="card-text">
+          Every C++ program starts with:<br>
+          <code>#include &lt;iostream&gt;</code> — includes the input/output library<br>
+          <code>using namespace std;</code> — allows writing <code>cout</code> instead of <code>std::cout</code><br><br>
+          Every program must have a <code>main()</code> function — this is where execution begins.<br>
+          <code>return 0;</code> at the end tells the OS the program finished successfully.
+        </div>
+        <div class="highlight-box">
+          <code>cout &lt;&lt; "Hello World!";</code> — outputs text to the screen<br>
+          <code>\n</code> — escape sequence to move cursor to a new line<br>
+          <code>endl</code> — manipulator that also moves to a new line (and flushes the buffer)<br>
+          Both <code>\n</code> and <code>endl</code> achieve the same visual result.
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">💬</span>Comments in C++</div>
+        <div class="card-text">
+          <code>// This is a single-line comment</code><br><br>
+          Comments are ignored by the compiler. They are used to explain code to humans.
+        </div>
+      </div>
+    </div>
+ 
+    <div id="u2-datatypes" class="unit-content">
+      <div class="cards-grid">
+        <div class="summary-card"><div class="summary-card-icon">🔢</div><div class="summary-card-title">int</div><div class="summary-card-text">Stores whole numbers. Example: <code>int x = 5;</code></div></div>
+        <div class="summary-card"><div class="summary-card-icon">🔣</div><div class="summary-card-title">double</div><div class="summary-card-text">Stores decimal/fractional numbers. Example: <code>double x = 2.8;</code></div></div>
+        <div class="summary-card"><div class="summary-card-icon">🔤</div><div class="summary-card-title">string</div><div class="summary-card-text">Stores text. Uses double quotes. Example: <code>string s = "Hello";</code></div></div>
+        <div class="summary-card"><div class="summary-card-icon">🔡</div><div class="summary-card-title">char</div><div class="summary-card-text">Stores a single character. Uses single quotes. Example: <code>char g = 'A';</code></div></div>
+        <div class="summary-card"><div class="summary-card-icon">✅</div><div class="summary-card-title">bool</div><div class="summary-card-text">Stores true or false only. Occupies 1 byte in memory. Example: <code>bool b = true;</code></div></div>
+        <div class="summary-card"><div class="summary-card-icon">💾</div><div class="summary-card-title">Memory Size</div><div class="summary-card-text"><strong>bool</strong>: 1 byte | <strong>int</strong>: 4 bytes | <strong>double</strong>: 8 bytes | <strong>char</strong>: 1 byte</div></div>
+      </div>
+    </div>
+ 
+    <div id="u2-operators" class="unit-content">
+      <div class="info-card">
+        <div class="card-title"><span class="icon">➕</span>Arithmetic Operators</div>
+        <div class="card-text">
+          <code>+</code> Addition &nbsp;|&nbsp; <code>-</code> Subtraction &nbsp;|&nbsp; <code>*</code> Multiplication<br>
+          <code>/</code> Division &nbsp;|&nbsp; <code>%</code> Modulus (remainder after integer division)<br><br>
+          Order of operations (BODMAS/PEMDAS) applies. Example: <code>10 * 2 + 5</code> = <strong>25</strong>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🔁</span>Increment &amp; Decrement</div>
+        <div class="card-text">
+          <code>++z</code> — increases value by 1 (prefix increment)<br>
+          <code>--z</code> — decreases value by 1 (prefix decrement)<br><br>
+          Example: if <code>z = 5</code>, then <code>++z</code> makes <code>z = 6</code>, then <code>--z</code> makes <code>z = 5</code> again.
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">⚖️</span>Comparison &amp; Reference Operators</div>
+        <div class="card-text">
+          <code>==</code> — compare two values (equal to)<br>
+          <code>&amp;</code> — reference operator (creates a reference variable to an existing variable)<br>
+          <code>*</code> — pointer operator
+        </div>
+      </div>
+    </div>
+ 
+    <div id="u2-strings" class="unit-content">
+      <div class="info-card">
+        <div class="card-title"><span class="icon">💬</span>String Functions</div>
+        <div class="card-text">
+          <code>.length()</code> — returns the number of characters in a string<br>
+          <code>.size()</code> — alias of <code>.length()</code> (both do the same thing)<br><br>
+          The <strong>dot (.)</strong> operator accesses functions that belong to the string object.<br>
+          The empty parentheses <code>()</code> indicate it is a <em>function/method being called</em>.<br><br>
+          <strong>Note:</strong> Spaces count as characters! <code>"A B C"</code> has length <strong>5</strong>, not 3.
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🔍</span>String Indexing</div>
+        <div class="card-text">
+          Strings are zero-indexed — first character is at index <strong>0</strong>.<br>
+          Example: <code>string s = "Hello";</code><br>
+          <code>s[0]</code> = H &nbsp;|&nbsp; <code>s[1]</code> = e &nbsp;|&nbsp; <code>s[4]</code> = o (last character)<br><br>
+          Each element accessed by <code>s[i]</code> is of type <code>char</code>, not <code>string</code>.<br>
+          You can change a character: <code>s[0] = 'J';</code> → <code>s</code> becomes <code>"Jello"</code>
+        </div>
+      </div>
+    </div>
+ 
+    <div id="u2-arrays" class="unit-content">
+      <div class="info-card">
+        <div class="card-title"><span class="icon">📋</span>Arrays in C++</div>
+        <div class="card-text">
+          An array stores multiple values of the same type.<br>
+          Declared with square brackets: <code>int arr[5];</code><br><br>
+          <strong>Array indexes start at 0</strong> (zero-indexed).<br>
+          To access elements: <code>arr[0]</code>, <code>arr[1]</code>, etc.
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🏛️</span>Classes &amp; Objects</div>
+        <div class="card-text">
+          <code>class</code> keyword is used to create a class in C++.<br>
+          To create an object: <code>MyClass myObj;</code><br><br>
+          C++ supports <strong>inheritance</strong> — a class can inherit attributes and methods from another class. (True)
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🔧</span>Useful Functions</div>
+        <div class="card-text">
+          <code>max(x, y)</code> — returns the highest value between x and y<br>
+          <code>functionName()</code> — how to define and call a function<br>
+          <code>return</code> — keyword used to return a value from a function<br>
+          <code>break</code> — stops a loop or exits a switch case<br>
+          <code>void</code> — function return type when no value is returned
+        </div>
+      </div>
+    </div>
+  </div><!-- /unit2 -->
+ 
+  <!-- ═══════════ UNIT 3 ═══════════ -->
+  <div id="panel-unit3" class="panel">
+    <div class="sec-header">
+      <h2>Unit 3 — Control Flow &amp; Loops in C++</h2>
+      <p>If statements, switch, while loops, for loops, and nested structures</p>
+    </div>
+ 
+    <div class="unit-tabs">
+      <button class="unit-tab active" onclick="switchUnit('u3-if',this,'unit3')">🔀 If Statements</button>
+      <button class="unit-tab" onclick="switchUnit('u3-switch',this,'unit3')">🔃 Switch</button>
+      <button class="unit-tab" onclick="switchUnit('u3-loops',this,'unit3')">🔁 Loops</button>
+      <button class="unit-tab" onclick="switchUnit('u3-examples',this,'unit3')">📋 Examples</button>
+    </div>
+ 
+    <div id="u3-if" class="unit-content active">
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🔀</span>If / Else If / Else</div>
+        <div class="card-text">
+          Syntax: <code>if (condition) { ... } else if (condition2) { ... } else { ... }</code><br><br>
+          <strong>Nested If:</strong> An if statement inside another if statement.<br>
+          Used when conditions depend on each other (e.g., check attendance first, then grade).
+        </div>
+        <div class="highlight-box">
+          Starting an if statement: <code>if (x &gt; y)</code> — no semicolon after the condition!<br>
+          The condition must be in parentheses.
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">💡</span>Nested If Example — Student Grades</div>
+        <div class="card-text">
+          Check attendance (≥70%) first. If met, check exam score:<br>
+          • Score 90–100 → Grade A<br>
+          • Score 80–89 → Grade B<br>
+          • Score 70–79 → Grade C<br>
+          • Score &lt;70 → Fails grade requirement<br>
+          If attendance &lt;70% → "Failed the attendance requirement"
+        </div>
+      </div>
+    </div>
+ 
+    <div id="u3-switch" class="unit-content">
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🔃</span>Switch Statement</div>
+        <div class="card-text">
+          Used when a variable can take one of several specific values.<br>
+          Syntax: <code>switch (variable) { case 1: ...; break; default: ...; }</code><br><br>
+          <strong>break</strong> is required to prevent fall-through to the next case.<br>
+          <strong>default</strong> handles any value not matching the listed cases.
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">📐</span>Area Calculator Example</div>
+        <div class="card-text">
+          Switch on shape choice (1–4):<br>
+          <code>case 1:</code> Triangle → <code>0.5 * base * height</code><br>
+          <code>case 2:</code> Rectangle → <code>length * width</code><br>
+          <code>case 3:</code> Square → <code>side * side</code><br>
+          <code>case 4:</code> Circle → <code>3.14159 * r * r</code><br>
+          <code>default:</code> Invalid selection
+        </div>
+      </div>
+    </div>
+ 
+    <div id="u3-loops" class="unit-content">
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🔁</span>While Loop</div>
+        <div class="card-text">
+          Syntax: <code>while (condition) { ... }</code><br>
+          Repeats as long as the condition is true.<br><br>
+          <strong>Starting a while loop:</strong> <code>while (x &gt; y)</code> — no semicolon.
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🔄</span>Do-While Loop</div>
+        <div class="card-text">
+          Syntax: <code>do { ... } while (condition);</code><br>
+          Executes the body <strong>at least once</strong> before checking the condition.<br><br>
+          <strong>Example — Passcode:</strong> Ask for a passcode repeatedly until the correct one is entered.
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🔢</span>For Loop &amp; Nested For Loops</div>
+        <div class="card-text">
+          Syntax: <code>for (int i = 0; i &lt; n; i++) { ... }</code><br><br>
+          <strong>Nested For Loops:</strong> A for loop inside another for loop.<br>
+          Example — Multiplication tables: outer loop selects the table number, inner loop iterates multipliers from 1 up to the table number itself.
+        </div>
+      </div>
+    </div>
+ 
+    <div id="u3-examples" class="unit-content">
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🍽️</span>Cafeteria Menu (Switch Example)</div>
+        <div class="card-text">
+          Display a menu with 5 items. Prompt user for choice 1–5. Use switch to show price. Default case shows "Invalid choice".
+        </div>
+        <div class="highlight-box" style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.8">
+          switch (choice) {<br>
+          &nbsp;&nbsp;case 1: cout &lt;&lt; "$2"; break;<br>
+          &nbsp;&nbsp;case 2: cout &lt;&lt; "$1"; break;<br>
+          &nbsp;&nbsp;...<br>
+          &nbsp;&nbsp;default: cout &lt;&lt; "Invalid";<br>
+          }
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">🔐</span>Passcode (Do-While Example)</div>
+        <div class="card-text">
+          Ask user to enter passcode. If wrong, print "Incorrect! Try again." Keep looping until the correct code (1234) is entered. Then print "Access Granted!".
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title"><span class="icon">✖️</span>Multiplication Tables (Nested For Example)</div>
+        <div class="card-text">
+          Ask user to enter <code>n</code>. Print tables for <code>n</code> and <code>n+1</code>. Each table goes from <code>i * 1</code> up to <code>i * i</code> (stops at the number itself).
+        </div>
+      </div>
+    </div>
+  </div><!-- /unit3 -->
+ 
+  <!-- ═══════════ QUIZ ═══════════ -->
+  <div id="panel-quiz" class="panel">
+ 
+    <!-- Category Cards -->
+    <div class="qcat-grid">
+      <div class="qcat-card active" data-cat="all" onclick="selectCat('all',this)">
+        <div class="qcat-icon">🎯</div>
+        <div class="qcat-name">كل الفصول</div>
+        <div class="qcat-sub">جميع الأسئلة مجمّعة</div>
+        <span class="qcat-dot"></span>
+      </div>
+      <div class="qcat-card" data-cat="ch1" onclick="selectCat('ch1',this)">
+        <div class="qcat-icon">📖</div>
+        <div class="qcat-name">Chapter 1</div>
+        <div class="qcat-sub">مقدمة الحوسبة</div>
+        <span class="qcat-dot"></span>
+      </div>
+      <div class="qcat-card" data-cat="cpp" onclick="selectCat('cpp',this)">
+        <div class="qcat-icon">💻</div>
+        <div class="qcat-name">C++ Basics</div>
+        <div class="qcat-sub">أساسيات C++</div>
+        <span class="qcat-dot"></span>
+      </div>
+    </div>
+ 
+    <!-- Controls bar -->
+    <div class="qctrl-bar">
+      <button class="qshuf-btn" onclick="quizShuffle()">🔀 خلط وإعادة</button>
+      <div class="qmode-pills">
+        <button class="qmode-pill active" data-mode="mc" onclick="selectMode('mc',this)">اختيار متعدد</button>
+        <button class="qmode-pill" data-mode="tf" onclick="selectMode('tf',this)">صح أم خطأ</button>
+        <button class="qmode-pill" data-mode="all" onclick="selectMode('all',this)">الكل</button>
+      </div>
+    </div>
+ 
+    <!-- Progress bar -->
+    <div class="qprog-wrap" id="qprog-wrap" style="display:none">
+      <div class="qprog-meta">
+        <span id="qprog-remain">متبقي —</span>
+        <span id="qprog-label">سؤال 1 من —</span>
+      </div>
+      <div class="qprog-track"><div class="qprog-fill" id="qprog-fill"></div></div>
+    </div>
+ 
+    <!-- Active question card -->
+    <div id="quiz-active" style="display:none"></div>
+ 
+    <!-- Result screen -->
+    <div id="quiz-result" style="display:none">
+      <div class="qres-card">
+        <div class="qres-emoji" id="qres-emoji">🏆</div>
+        <div class="qres-title" id="qres-title">ممتاز!</div>
+        <div class="qres-circle-wrap">
+          <svg viewBox="0 0 120 120" class="qres-svg">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(34,197,94,.15)" stroke-width="11"/>
+            <circle cx="60" cy="60" r="50" fill="none" stroke="var(--accent2)" stroke-width="11"
+              stroke-dasharray="314" stroke-dashoffset="314" id="qres-circle"
+              stroke-linecap="round" transform="rotate(-90 60 60)"/>
+          </svg>
+          <div class="qres-inner">
+            <div class="qres-frac" id="qres-frac">0/0</div>
+            <div class="qres-pct" id="qres-pct">0%</div>
+          </div>
+        </div>
+        <p class="qres-msg" id="qres-msg"></p>
+        <button class="qres-retry-btn" onclick="retryQuiz()">🔁 إعادة الاختبار</button>
+      </div>
+    </div>
+ 
+    <!-- Idle state -->
+    <div id="quiz-idle">
+      <div class="qidle-box">
+        <div style="font-size:2.5rem;margin-bottom:.7rem">📚</div>
+        <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:.35rem">اختر فصلاً وابدأ!</div>
+        <div style="font-size:13px;color:#4b7c5e">اضغط على أي فصل أعلاه ثم ابدأ الاختبار</div>
+        <button class="qstart-go" onclick="startQuiz()" style="margin-top:1.2rem">▶ ابدأ الاختبار</button>
+      </div>
+    </div>
+ 
+  </div>
+ 
+    <!-- ═══════════ QUESTION BANK ═══════════ -->
+  <div id="panel-bank" class="panel">
+    <div class="sec-header">
+      <h2>Question Bank — Solved</h2>
+      <p>All questions grouped by section with correct answers and explanations</p>
+    </div>
+    <div class="bank-filters">
+      <button class="bank-pill active" onclick="setBankFilter('all', this)">All Chapters</button>
+      <button class="bank-pill" onclick="setBankFilter('ch1', this)">Chapter 1</button>
+      <button class="bank-pill" onclick="setBankFilter('cpp', this)">Chapter 2 &amp; 3 (C++)</button>
+    </div>
+    <div id="bank-list"></div>
+  </div>
+ 
+  <!-- ═══════════ CODE PAGE ═══════════ -->
+  <div id="panel-code" class="panel">
+    <div class="sec-header">
+      <h2>Code — Full Examples</h2>
+      <p>Complete code samples with a short explanation for each</p>
+    </div>
+    <div id="code-list"></div>
+  </div>
+ 
+  <!-- ═══════════ PUZZLE ═══════════ -->
+  <div id="panel-puzzle" class="panel">
+    <div class="sec-header">
+      <h2>Code Puzzle — Scratch Style 🧩</h2>
+      <p>Arrange the code blocks in the correct order. Click 💡 on any block for a hint.</p>
+    </div>
+    <div id="puzzle-list"></div>
+  </div>
+ 
+  <!-- ═══════════ COMPILER ═══════════ -->
+  <div id="panel-compiler" class="panel">
+    <div class="sec-header">
+      <h2>⚙️ C++ Simulator</h2>
+      <p>Write and simulate C++ code. Supports basic output, variables, and simple logic.</p>
+    </div>
+    <div class="compiler-wrap">
+      <div class="compiler-header">
+        <h3>💻 C++ Code Editor</h3>
+        <div class="compiler-actions">
+          <button class="clear-btn" onclick="clearEditor()">🗑 Clear</button>
+          <button class="run-btn" onclick="runCode()">▶ Run</button>
+        </div>
+      </div>
+      <div class="template-strip">
+        <span>Templates:</span>
+        <button class="tpl-btn" onclick="loadTemplate('hello')">Hello World</button>
+        <button class="tpl-btn" onclick="loadTemplate('vars')">Variables</button>
+        <button class="tpl-btn" onclick="loadTemplate('if')">If/Else</button>
+        <button class="tpl-btn" onclick="loadTemplate('switch')">Switch</button>
+        <button class="tpl-btn" onclick="loadTemplate('for')">For Loop</button>
+        <button class="tpl-btn" onclick="loadTemplate('while')">While Loop</button>
+        <button class="tpl-btn" onclick="loadTemplate('dowhile')">Do-While</button>
+        <button class="tpl-btn" onclick="loadTemplate('grade')">Grade System</button>
+      </div>
+      <div class="compiler-body">
+        <div class="editor-pane">
+          <div class="pane-label">📝 Code Editor</div>
+          <textarea id="code-editor" class="code-editor" spellcheck="false" placeholder="// Write your C++ code here...
+#include &lt;iostream&gt;
+using namespace std;
+ 
+int main() {
+    cout &lt;&lt; &quot;Hello World!&quot;;
+    return 0;
+}"></textarea>
+        </div>
+        <div class="output-pane">
+          <div class="pane-label">📤 Output</div>
+          <div id="output-area" class="output-area">// Output will appear here when you click Run ▶</div>
+        </div>
+      </div>
+      <div class="compiler-note">⚠️ This is a C++ simulator — it understands common patterns from your course (cout, variables, if/else, switch, loops). Not a full compiler.</div>
+    </div>
+  </div>
+ 
+</div><!-- /container -->
+ 
+<script>
+// ═══ NAV ═══
+function switchPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+function switchUnit(contentId, btn, unitId) {
+  const panel = document.getElementById('panel-' + unitId);
+  panel.querySelectorAll('.unit-content').forEach(c => c.classList.remove('active'));
+  panel.querySelectorAll('.unit-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(contentId).classList.add('active');
+  btn.classList.add('active');
+}
+ 
+// ═══ ESSAY ═══
+function toggleEssay(btn) {
+  const answer = btn.nextElementSibling;
+  const showing = answer.classList.toggle('show');
+  btn.textContent = showing ? '📕 Hide Answer' : '📖 Show Answer';
+}
+ 
+// ═══════════════════════════════════════════════
+// QUIZ ENGINE — built from PDF_BANK
+// ═══════════════════════════════════════════════
+ 
+// Flatten PDF_BANK into a unified quiz array at runtime
+function buildQuizFromBank() {
+  const allQ = [];
+  const cats = ['ch1', 'cpp'];
+  cats.forEach(cat => {
+    (PDF_BANK[cat] || []).forEach(q => {
+      allQ.push({ ...q, cat });
+    });
+  });
+  return allQ;
+}
+ 
+let quizCat     = 'all';
+let quizMode    = 'mc';       // 'mc' | 'tf' | 'all'
+let quizQueue   = [];
+let quizIdx     = 0;
+let quizScore   = 0;
+let quizRunning = false;
+let bankFilter  = 'all';
+ 
+// ── helpers ──────────────────────────────────────
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+ 
+function getFiltered() {
+  const ALL = buildQuizFromBank();
+  let qs = quizCat === 'all' ? [...ALL] : ALL.filter(q => q.cat === quizCat);
+  if (quizMode === 'tf') qs = qs.filter(q => q.opts.length === 2);
+  if (quizMode === 'mc') qs = qs.filter(q => q.opts.length >  2);
+  return qs;
+}
+ 
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+ 
+// ── UI helpers ─────────────────────────────────────
+function showScreen(which) {
+  document.getElementById('quiz-idle').style.display   = which === 'idle'   ? 'block' : 'none';
+  document.getElementById('quiz-active').style.display = which === 'active' ? 'block' : 'none';
+  document.getElementById('quiz-result').style.display = which === 'result' ? 'block' : 'none';
+  document.getElementById('qprog-wrap').style.display  = which === 'active' ? 'block' : 'none';
+}
+ 
+function updateProgress() {
+  const total   = quizQueue.length;
+  const current = quizIdx + 1;
+  const pct     = Math.round((quizIdx / total) * 100);
+  document.getElementById('qprog-label').textContent  = `سؤال ${current} من ${total}`;
+  document.getElementById('qprog-remain').textContent = `متبقي ${total - quizIdx}`;
+  document.getElementById('qprog-fill').style.width   = pct + '%';
+}
+ 
+// ── category / mode selectors ──────────────────────
+function selectCat(cat, el) {
+  quizCat = cat;
+  document.querySelectorAll('.qcat-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  if (quizRunning) startQuiz();
+}
+ 
+function selectMode(mode, el) {
+  quizMode = mode;
+  document.querySelectorAll('.qmode-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  if (quizRunning) startQuiz();
+}
+ 
+function quizShuffle() { startQuiz(); }
+ 
+// ── start / restart ────────────────────────────────
+function startQuiz() {
+  const qs = getFiltered();
+  if (qs.length === 0) {
+    alert('لا توجد أسئلة في هذا الاختيار!');
+    return;
+  }
+  quizQueue   = shuffle(qs);
+  quizIdx     = 0;
+  quizScore   = 0;
+  quizRunning = true;
+  showScreen('active');
+  renderQuestion();
+}
+ 
+function retryQuiz() { startQuiz(); }
+ 
+// ── render one question ────────────────────────────
+function renderQuestion() {
+  updateProgress();
+  const q        = quizQueue[quizIdx];
+  const isLast   = quizIdx === quizQueue.length - 1;
+  const typeLabel = q.opts.length === 2 ? 'صح أم خطأ' : 'اختيار متعدد';
+  const catLabel  = q.cat === 'ch1' ? 'Chapter 1' : 'C++ Basics';
+ 
+  // If sub-question, show parent context
+  const parentHtml = q.parent
+    ? `<div class="quiz-parent-ctx">${q.parent}</div>`
+    : '';
+ 
+  const optsHtml = q.opts.map((o, j) => `
+    <button class="qcard-opt" data-choice="${j}" data-ans="${q.ans}">
+      ${o}
+      <span class="qcard-letter">${'ABCD'[j]}</span>
+    </button>`).join('');
+ 
+  document.getElementById('quiz-active').innerHTML = `
+    <div class="qcard">
+      <div class="qcard-meta">
+        <span class="qcard-num">سؤال ${quizIdx + 1}</span>
+        <span class="qcard-type">${typeLabel}</span>
+        <span class="qcard-type" style="background:rgba(34,197,94,.07)">${catLabel}</span>
+      </div>
+      ${parentHtml}
+      <div class="qcard-text">${q.q}</div>
+      <div class="qcard-opts" id="qa-opts">${optsHtml}</div>
+      <div class="qcard-fb" id="qa-fb"></div>
+      <button class="qcard-next" id="qa-next" onclick="nextQuestion()">
+        ${isLast ? '🏁 عرض النتيجة' : 'التالي ←'}
+      </button>
+    </div>`;
+ 
+  document.querySelectorAll('.qcard-opt').forEach(btn => {
+    btn.addEventListener('click', function() {
+      if (this.disabled) return;
+      handleAnswer(parseInt(this.dataset.choice), parseInt(this.dataset.ans), q.expl || '');
+    });
+  });
+}
+ 
+function handleAnswer(chosen, correct, expl) {
+  const opts = document.querySelectorAll('.qcard-opt');
+  opts.forEach(o => o.disabled = true);
+  const isRight = chosen === correct;
+  if (isRight) quizScore++;
+  opts[chosen].classList.add(isRight ? 'q-correct' : 'q-wrong');
+  if (!isRight) opts[correct].classList.add('q-reveal');
+  const fb = document.getElementById('qa-fb');
+  fb.className = `qcard-fb show ${isRight ? 'q-cfb' : 'q-wfb'}`;
+  fb.innerHTML = isRight
+    ? `✅ إجابة صحيحة!${expl ? `<div class="qcard-expl">${expl}</div>` : ''}`
+    : `❌ إجابة خاطئة${expl ? `<div class="qcard-expl">${expl}</div>` : ''}`;
+  document.getElementById('qa-next').style.display = 'block';
+}
+ 
+function nextQuestion() {
+  quizIdx++;
+  if (quizIdx >= quizQueue.length) {
+    showResult();
+  } else {
+    renderQuestion();
+  }
+}
+ 
+// ── result screen ──────────────────────────────────
+function showResult() {
+  const total = quizQueue.length;
+  const pct   = Math.round((quizScore / total) * 100);
+  let emoji = '🏆', title = 'ممتاز!';
+  if      (pct < 50) { emoji = '💪'; title = 'حاول مجدداً، ستتحسن!'; }
+  else if (pct < 70) { emoji = '👍'; title = 'جيد! يمكنك تحسين أدائك'; }
+  else if (pct < 90) { emoji = '🌟'; title = 'رائع! أداء جيد جداً'; }
+  document.getElementById('qres-emoji').textContent = emoji;
+  document.getElementById('qres-title').textContent = title;
+  document.getElementById('qres-frac').textContent  = `${quizScore}/${total}`;
+  document.getElementById('qres-pct').textContent   = pct + '%';
+  document.getElementById('qres-msg').textContent   = `لقد أجبت على ${quizScore} سؤال بشكل صحيح من أصل ${total}`;
+  document.getElementById('qprog-fill').style.width = '100%';
+  document.getElementById('qprog-label').textContent  = `سؤال ${total} من ${total}`;
+  document.getElementById('qprog-remain').textContent = 'متبقي 0';
+  showScreen('result');
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      const c = document.getElementById('qres-circle');
+      if (c) c.style.strokeDashoffset = 314 - (pct / 100) * 314;
+    }, 80);
+  });
+}
+ 
+// ── question bank ─────────────────────────────
+// PDF questions in exact order
+const PDF_BANK = {
+  ch1: [
+    {q:'What was the first device known to perform calculations?', opts:['The Pascaline','The Analytical Engine','The abacus','The Difference Engine'], ans:0},
+    {q:'Who developed the mechanical calculator known as the Pascaline in 1642?', opts:['Gottfried Wilhelm Leibniz','Blaise Pascal','Charles Babbage','John von Neumann'], ans:1},
+    {q:'In the early 19th century, what did Joseph Jacquard introduce to control weaving machines?', opts:['Transistors','Microprocessors','Punched cards','Sliding beads'], ans:2},
+    {q:'Which inventor designed the Difference Engine and the Analytical Engine?', opts:['Herman Hollerith','Blaise Pascal','Ada Lovelace','Charles Babbage'], ans:3},
+    {q:'Who is considered the first computer programmer?', opts:['Ada Lovelace','Joseph Jacquard','Herman Hollerith','John von Neumann'], ans:0},
+    {q:'Herman Hollerith developed a machine to process census data that eventually evolved into which modern company?', opts:['Apple','Microsoft','IBM','Intel'], ans:2},
+    {q:'Built in 1946, which of the following is considered one of the first electronic computers?', opts:['Mark I','Pascaline','ENIAC','IBM PC'], ans:2},
+    {q:'Who introduced the computer architecture that allowed both data and instructions to be stored in memory?', opts:['Charles Babbage','John von Neumann','Blaise Pascal','Gottfried Wilhelm Leibniz'], ans:1},
+    {q:'What invention in the 1950s made computers smaller, faster, and more reliable?', opts:['Integrated circuits','Punched cards','Transistors','Vacuum tubes'], ans:2},
+    {q:'FORTRAN and COBOL, which emerged in the 1950s, are examples of what?', opts:['Hardware components','Programming languages','Operating systems','Secondary storage devices'], ans:1},
+    {q:'Which basic computer operation involves receiving data?', opts:['Output','Storage','Processing','Input'], ans:3},
+    {q:'Which basic computer operation is responsible for performing arithmetic and logical operations?', opts:['Input','Output','Processing','Storage'], ans:2},
+    {q:'Hardware refers to the physical components of a computer that you can touch. Which of the following is considered hardware?', opts:['Central Processing Unit (CPU)','Main Memory (RAM)','Input/Output devices','All of the above'], ans:3},
+    {q:'What must happen to programs and data before they can be executed by the computer?', opts:['They must be saved to a flash drive.','They must be printed.','They must be loaded into RAM.','They must be deleted from secondary storage.'], ans:2},
+    {q:'Main memory is composed of memory cells that each have what specific feature?', opts:['A dedicated microprocessor','A unique address','A permanent power source','A secondary storage backup'], ans:1},
+    {q:'Which of the following is used to store programs and data permanently?', opts:['CPU','Main Memory (RAM)','Secondary Storage','Input Devices'], ans:2},
+    {q:'Flash drives, CDs, and DVDs are examples of what type of computer component?', opts:['Main Memory','Secondary Storage','Input devices','Processing units'], ans:1},
+    {q:'A keyboard and a mouse are examples of which type of device?', opts:['Output devices','Input devices','Storage devices','System programs'], ans:1},
+    {q:'The system program that loads first when you turn on your PC is called the what?', opts:['Word processor','Spreadsheet','Application program','Operating system'], ans:3},
+    {q:'Which software is responsible for running application programs?', opts:['The Central Processing Unit','The Operating System','Main Memory','Secondary Storage'], ans:1},
+    {q:'What is the primary function of the Central Processing Unit (CPU) in a computer?', opts:['To provide permanent storage for user files','To convert binary data into physical monitor pixels','To perform arithmetic and logical operations','To load the operating system into RAM'], ans:2},
+    {q:'Why is secondary storage necessary in a computer system?', opts:['It is directly connected to the CPU for execution','It is faster than RAM at processing instructions','RAM loses its contents when the computer is turned off','It is required to write programs in programming languages'], ans:2},
+    {q:'Which of the following is an example of an application program?', opts:['Input/Output handler','Word processor','Memory management service','Operating system'], ans:1},
+    {q:'What happens to the data stored in RAM when the computer is switched off?', opts:['It remains stored in the memory cells','It is compressed to save space','It is lost','It is moved to secondary storage automatically'], ans:2},
+    {q:'What is the primary role of an operating system?', opts:['To perform arithmetic operations for the user','To serve as a secondary storage device','To control the computer and manage system activities','To write code in programming languages'], ans:2},
+    {q:'Which component of a computer system feeds data and programs into the computer?', opts:['Output device','Main memory (RAM)','Input device','Secondary storage'], ans:2},
+    {q:'What is a binary number?', opts:['A number system using digits 0 through 9','A way to identify memory address labels','A method to compress large files','A number composed of only 0s and 1s'], ans:3},
+  ],
+  cpp: [
+    {q:'What is a correct syntax to output "Hello World" in C++?', opts:['cout &lt;&lt; "Hello World";','print ("Hello World");','Console.WriteLine("Hello World");','System.out.println("Hello World");'], ans:0},
+    {q:'C++ is an alias of C#', opts:['False','True'], ans:0},
+    {q:'How do you insert COMMENTS in C++ code?', opts:['// This is a comment','/* This is a comment','# This is a comment'], ans:0},
+    {q:'Which data type is used to create a variable that should store text?', opts:['string','myString','Txt','String'], ans:0},
+    {q:'How do you create a variable with the numeric value 5?', opts:['int x = 5;','num x = 5','double x = 5;','x = 5;'], ans:0},
+    {q:'How do you create a variable with the floating number 2.8?', opts:['double x = 2.8;','int x = 2.8;','byte x = 2.8','x = 2.8;'], ans:0},
+    {q:'Which method can be used to find the length of a string?', opts:['length()','getLength()','getSize()','len()'], ans:0},
+    {q:'Which operator is used to add together two values?', opts:['The + sign','The * sign','The & sign'], ans:0},
+    {q:'The value of a string variable can be surrounded by single quotes.', opts:['True','False'], ans:1},
+    {q:'Which header file lets us work with input and output objects?', opts:['#include &lt;iostream&gt;','#include &lt;iosstring&gt;','#include &lt;inputstr&gt;','#include &lt;stream&gt;'], ans:0},
+    {q:'Which operator can be used to compare two values?', opts:['==','>&lt;','=','&lt;&gt;'], ans:0},
+    {q:'To declare an array in C++, define the variable type with:', opts:['()','{}','[]'], ans:2},
+    {q:'Array indexes start with:', opts:['1','0'], ans:1},
+    {q:'How do you create a function in C++?', opts:['functionName[]','(functionName)','functionName()','functionName.'], ans:2},
+    {q:'How do you call a function in C++?', opts:['functionName;','functionName[];','(functionName);','functionName();'], ans:3},
+    {q:'Which keyword is used to create a class in C++?', opts:['class()','MyClass','className','class'], ans:3},
+    {q:'What is the correct way to create an object called myObj of MyClass?', opts:['new myObj = MyClass();','MyClass myObj;','class myObj = new MyClass();','class MyClass = new myObj();'], ans:1},
+    {q:'In C++, it is possible to inherit attributes and methods from one class to another.', opts:['True','False'], ans:0},
+    {q:'Which method can be used to find the highest value of x and y?', opts:['maximum(x,y)','maxNum(x,y)','max(x,y)','largest(x,y)'], ans:2},
+    {q:'Which operator is used to multiply numbers?', opts:['#','*','%','x'], ans:1},
+    {q:'How do you create a reference variable of an existing variable?', opts:['With the * operator','With the ref word','With the REF word','With the & operator'], ans:3},
+    {q:'How do you start writing an if statement in C++?', opts:['if x &gt; y then:','if (x &gt; y)','if x &gt; y:'], ans:1},
+    {q:'How do you start writing a while loop in C++?', opts:['while (x &gt; y)','while x &gt; y {','x &gt; y while {','while x &gt; y:'], ans:0},
+    {q:'Which keyword is used to return a value inside a method?', opts:['return','get','void','break'], ans:0},
+    {q:'Which statement is used to stop a loop?', opts:['exit','return','stop','break'], ans:3},
+    {q:'In C++, what is the \\n character combination called?', opts:['An escape sequence','A string literal','A comment','A syntax error'], ans:0},
+    // Q27 sub-questions
+    {q:'Q27 — What is the name of the function where the execution of every C++ program begins?', opts:['iostream','cout','namespace','main()'], ans:3, sub:true, parent:'Q27: For the following C++ code — #include &lt;iostream&gt; / using namespace std; / int main() { cout &lt;&lt; "Hello World!"; return 0; }'},
+    {q:'Q27 — What does the statement return 0; indicate to the operating system?', opts:['The program has crashed','The program finished successfully','The program needs to restart','The program is waiting for user input'], ans:1, sub:true},
+    {q:'Q27 — What will be displayed on the screen when this program is executed?', opts:['int main()','Hello World!','"Hello World!"','return 0;'], ans:1, sub:true},
+    {q:'Q27 — Because using namespace std; is included at the top, how is the output command written?', opts:['std::cout','cout','out &lt;&lt;','print()'], ans:0, sub:true},
+    // Q28 sub-questions
+    {q:'Q28 — What is the effect of adding \\n at the end of the "Hello World!" string?', opts:['It prints the letter "n" on the screen.','It clears the screen before printing.','It moves the cursor to a new line for the next output.','It causes a compilation error.'], ans:2, sub:true, parent:'Q28: For the following C++ code — cout &lt;&lt; "Hello World! \\n"; / cout &lt;&lt; "I am learning C++";'},
+    {q:'Q28 — What will be the final output displayed by this program?', opts:['Hello World! \\nI am learning C++','Hello World! I am learning C++','Hello World! (newline) I am learning C++','Hello World! \\n (newline) I am learning C++'], ans:2, sub:true},
+    {q:'Q28 — What would happen if the semicolon (;) was removed after the second cout statement?', opts:['The program would run but skip that line.','The compiler would report a syntax error.','The two lines would print on the same line.','The computer would fix it automatically.'], ans:1, sub:true},
+    // Q29 sub-questions
+    {q:'Q29 — What is the word endl known as in C++?', opts:['A variable','A manipulator','A string literal','A function call'], ans:1, sub:true, parent:'Q29: Comparing \\n vs endl in cout statements'},
+    {q:'Q29 — What is the main syntax difference between "\\n" and endl?', opts:['"\\n" must be inside double quotes, while endl is used without quotes.','endl must be inside double quotes, while "\\n" is not.','endl requires a special library other than &lt;iostream&gt;.','There is no syntax difference; they are written exactly the same way.'], ans:0, sub:true},
+    {q:'Q29 — Why is the &lt;&lt; operator used twice in the first cout line?', opts:['To make the program run faster.','To separate the text string from the newline command (\\n or endl).','Because C++ requires two operators for every line.','To indicate the start and end of the output.'], ans:1, sub:true},
+    {q:'If you want to store a student\'s grade as a single letter (like \'A\' or \'B\'), which data type should you use?', opts:['int','double','char','bool'], ans:2},
+    {q:'Which data type is specifically designed to store numbers with fractional parts or decimals, such as 5.99?', opts:['int','double','string','bool'], ans:1},
+    {q:'A bool data type is used to store values that represent:', opts:['Large whole numbers','Text and sentences','Only two possible states: true or false','Scientific notation'], ans:2},
+    {q:'How is a char value written differently than a string value?', opts:['char uses double quotes (""), while string uses single quotes (\'\').','char uses single quotes (\'\'), while string uses double quotes ("").','Neither uses quotes.','Both must use double quotes ("").'], ans:1},
+    {q:'What is the purpose of the text starting with // ?', opts:['It is code that the computer executes.','It is a comment used to explain the code to humans and is ignored by the compiler.','It defines a new variable name.','It is a required part of the C++ syntax for every variable.'], ans:1},
+    {q:'What does the % symbol represent in the expression x % y?', opts:['It calculates the percentage of x relative to y.','It divides the two numbers and returns only the decimal part.','It returns the remainder left over after integer division.','It is used to indicate that the number is a constant.'], ans:2},
+    {q:'Q36 — What do the symbols ++z and --z do to the variable z?  (int z = 5; ++z; cout&lt;&lt;z; --z; cout&lt;&lt;z;)', opts:['++z adds 2 to the value; --z subtracts 2.','++z multiplies the value by itself; --z divides it.','++z increases the value by 1; --z decreases the value by 1.','They are used to create a new variable named z.'], ans:2},
+    {q:'Q37 — What is the final value of z printed at the very end?  (int z=5; ++z; cout&lt;&lt;z; --z; cout&lt;&lt;z;)', opts:['4','5','6','7'], ans:1},
+    {q:'What would be the output of the following line of code?  cout &lt;&lt; 10 * 2 + 5;', opts:['70','25','1025','Error'], ans:1},
+    {q:'Instead of printing the numbers directly, the code stores them in result1 and result2. This process is known as:', opts:['Direct output','Variable assignment','Function calling','Data streaming'], ans:1},
+    // Q40 sub-questions
+    {q:'Q40 — What is the primary purpose of the .length() function?  (string txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";)', opts:['To capitalize all the letters in the string.','To count and return the total number of characters in the string.','To delete the string from the computer\'s memory.','To check if the string contains any numbers.'], ans:1, sub:true, parent:'Q40: string txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; / cout &lt;&lt; "The length of the txt string is: " &lt;&lt; txt.length();'},
+    {q:'Q40 — The string txt contains all letters A to Z. What number will the program print?', opts:['24','25','26','0'], ans:2, sub:true},
+    {q:'Q40 — In C++, which other function can be used to get the same result as txt.length()?', opts:['txt.size()','txt.width()','txt.count()','txt.total()'], ans:0, sub:true},
+    {q:'Q40 — Why is there a dot (.) between txt and length()?', opts:['It indicates the end of a sentence.','It is used to access a function that belongs to the string object txt.','It is a typo and should be a comma.','It is used to multiply the string by the length.'], ans:1, sub:true},
+    {q:'Q40 — If the string was changed to txt = "A B C";, what would txt.length() return?', opts:['3 (only the letters)','5 (letters and the spaces between them)','1 (only the first letter)','0 (it cannot count spaces)'], ans:1, sub:true},
+    // Q41 sub-questions
+    {q:'Q41 — What is the function size() used for in the provided code?', opts:['To change the font size of the text.','To find the amount of memory (in bytes) used by the string.','To return the number of characters in the string.','To resize the string to a smaller length.'], ans:2, sub:true, parent:'Q41: string txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; / cout &lt;&lt; "The length of the txt string is: " &lt;&lt; txt.size();'},
+    {q:'Q41 — Which statement is true regarding size() and length() in C++ strings?', opts:['size() is only for numbers, while length() is only for text.','They are aliases of each other and perform the exact same task.','size() counts spaces, but length() does not.','size() is a faster function than length().'], ans:1, sub:true},
+    {q:'Q41 — In the expression txt.size(), why are the empty parentheses () necessary?', opts:['They indicate that size is a function/method being called.','They are used to store the output of the function.','They are required for all variable names in C++.','They tell the compiler that the string is empty.'], ans:0, sub:true},
+    {q:'Q41 — If the code is executed as shown, what will the console display?', opts:['26','The length of the txt string is: size()','The length of the txt string is: 26','The length of the txt string is: txt.size()'], ans:2, sub:true},
+    // Q42 sub-questions
+    {q:'Q42 — What would be the output of: cout &lt;&lt; myString[1]; ?  (string myString = "Hello";)', opts:['H','e','l','An error message'], ans:1, sub:true, parent:'Q42: string myString = "Hello"; / cout &lt;&lt; myString[0];'},
+    {q:'Q42 — In the string "Hello", what is the index of the last character (\'o\')?', opts:['4','5','6','-1'], ans:0, sub:true},
+    {q:'Q42 — What is the data type of the individual element accessed by myString[0]?', opts:['string','int','char','float'], ans:2, sub:true},
+    {q:'Q42 — If you execute myString[0] = \'J\'; before the cout statement, what will be the new output?', opts:['H','Hello','J','Jello'], ans:2, sub:true},
+    {q:'Typically, how much memory does a single bool variable occupy in C++?', opts:['1 bit','1 byte','4 bytes','8 bytes'], ans:1},
+  ]
+};
+ 
+function renderQuestionBank() {
+  const bank = document.getElementById('bank-list');
+  if (!bank) return;
+ 
+  const groups = [
+    { key: 'ch1',  title: 'Chapter 1 Questions',              emoji: '📖' },
+    { key: 'cpp',  title: 'Chapter 2 & 3 Questions (C++)',    emoji: '💻' }
+  ];
+  const vis = bankFilter === 'all' ? groups : groups.filter(g => g.key === bankFilter);
+ 
+  bank.innerHTML = vis.map(group => {
+    const items = PDF_BANK[group.key];
+    let qNum = 0;
+    return `
+      <div class="bank-section">
+        <div class="bank-title">${group.emoji} ${group.title} (${items.length} Questions)</div>
+        ${items.map((q) => {
+          if (!q.sub) qNum++;
+          const numLabel = q.sub ? '' : `Q${qNum}. `;
+          const parentBlock = q.parent ? `<div class="bank-parent-code">${q.parent}</div>` : '';
+          const subLabel = q.sub ? '<span class="bank-sub-badge">↳ sub</span>' : '';
+          return `
+          <div class="bank-card ${q.sub ? 'bank-card-sub' : ''}">
+            ${parentBlock}
+            <div class="bank-q">${subLabel}${numLabel}${q.q}</div>
+            ${q.opts.map((opt, idx) => `
+              <div class="bank-opt ${idx === q.ans ? 'correct' : ''}">
+                ${'ABCD'[idx] || String.fromCharCode(65+idx)}. ${opt} ${idx === q.ans ? '✓' : ''}
+              </div>`).join('')}
+          </div>`;
+        }).join('')}
+      </div>`;
+  }).join('');
+}
+ 
+function setBankFilter(filter, btn) {
+  bankFilter = filter;
+  document.querySelectorAll('.bank-pill').forEach(p => p.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderQuestionBank();
+}
+ 
+// ── stubs kept for backward compat ────────────
+function filterQuiz()   {}
+function resetQuiz()    {}
+function renderQuiz()   {}
+function updateScoreBar(){}
+function answerQ()      {}
+ 
+// ═══ PUZZLE DATA ═══
+const PUZZLES = [
+  {
+    id: 'p1',
+    title: 'Example 1: Student Status (Nested If)',
+    q: 'Arrange the blocks to build a C++ program that evaluates student status based on attendance and exam score.',
+    blocks: [
+      {code:'#include <iostream>', hint:'إضافة مكتبة الإدخال/الإخراج'},
+      {code:'using namespace std;', hint:'لاستخدام cout و cin مباشرة'},
+      {code:'int main() {', hint:'بداية البرنامج'},
+      {code:'    float attendance, score;', hint:'تعريف متغيري الحضور والدرجة'},
+      {code:'    cout << "Enter attendance percentage: ";', hint:'طلب نسبة الحضور'},
+      {code:'    cin >> attendance;', hint:'قراءة الحضور من المستخدم'},
+      {code:'    if (attendance >= 70) {', hint:'التحقق من شرط الحضور أولًا'},
+      {code:'        cout << "Enter exam score: ";', hint:'إذا الحضور مقبول: اطلب الدرجة'},
+      {code:'        cin >> score;', hint:'قراءة درجة الامتحان'},
+      {code:'        if (score >= 90 && score <= 100) cout << "Grade: A\\n";', hint:'من 90 إلى 100 = A'},
+      {code:'        else if (score >= 80 && score < 90) cout << "Grade: B\\n";', hint:'من 80 إلى أقل من 90 = B'},
+      {code:'        else if (score >= 70 && score < 80) cout << "Grade: C\\n";', hint:'من 70 إلى أقل من 80 = C'},
+      {code:'        else cout << "Fails to meet grade requirement.\\n";', hint:'أقل من 70: فشل في شرط الدرجة'},
+      {code:'    } else {', hint:'في حالة الحضور أقل من 70%'},
+      {code:'        cout << "Failed the attendance requirement.\\n";', hint:'رسالة فشل الحضور'},
+      {code:'    }', hint:'إغلاق if/else'},
+      {code:'    return 0;', hint:'إنهاء البرنامج بنجاح'},
+      {code:'}', hint:'إغلاق main'},
+    ],
+    answer: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
+  },
+  {
+    id: 'p2',
+    title: 'Example 2: Faculty Cafeteria Menu (Switch)',
+    q: 'Arrange the blocks to create a menu system using switch that displays final item prices.',
+    blocks: [
+      {code:'#include <iostream>', hint:'إضافة مكتبة الإدخال/الإخراج'},
+      {code:'using namespace std;', hint:'لاستخدام cout/cin مباشرة'},
+      {code:'int main() {', hint:'بداية البرنامج'},
+      {code:'    int choice;', hint:'متغير لتخزين اختيار المستخدم'},
+      {code:'    cout << "--- Faculty Cafeteria Menu ---" << endl;', hint:'طباعة عنوان القائمة'},
+      {code:'    cout << "1. Coffee - $2\\n2. Tea - $1\\n3. Sandwich - $5\\n4. Salad - $4\\n5. Juice - $3" << endl;', hint:'عرض عناصر القائمة الخمسة'},
+      {code:'    cout << "Enter your choice (1-5): ";', hint:'طلب الاختيار'},
+      {code:'    cin >> choice;', hint:'قراءة الاختيار'},
+      {code:'    switch (choice) {', hint:'بدء switch على choice'},
+      {code:'        case 1: cout << "Final Price: $2\\n"; break;', hint:'حالة 1: Coffee'},
+      {code:'        case 2: cout << "Final Price: $1\\n"; break;', hint:'حالة 2: Tea'},
+      {code:'        case 3: cout << "Final Price: $5\\n"; break;', hint:'حالة 3: Sandwich'},
+      {code:'        case 4: cout << "Final Price: $4\\n"; break;', hint:'حالة 4: Salad'},
+      {code:'        case 5: cout << "Final Price: $3\\n"; break;', hint:'حالة 5: Juice'},
+      {code:'        default: cout << "Invalid choice\\n";', hint:'أي اختيار خارج 1-5'},
+      {code:'    }', hint:'إغلاق switch'},
+      {code:'    return 0;', hint:'إنهاء البرنامج'},
+      {code:'}', hint:'إغلاق main'},
+    ],
+    answer: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+  },
+  {
+    id: 'p3',
+    title: 'Example 3: Passcode Check (Do-While)',
+    q: 'Arrange the blocks to build a passcode program that keeps asking until the correct code is entered.',
+    blocks: [
+      {code:'#include <iostream>', hint:'إضافة مكتبة الإدخال/الإخراج'},
+      {code:'using namespace std;', hint:'لاستخدام cout/cin مباشرة'},
+      {code:'int main() {', hint:'بداية البرنامج'},
+      {code:'    int passcode;', hint:'متغير لتخزين الرمز المدخل'},
+      {code:'    const int correctCode = 1234;', hint:'الرمز الصحيح الثابت'},
+      {code:'    do {', hint:'ابدأ حلقة تنفذ مرة واحدة على الأقل'},
+      {code:'        cout << "Enter the passcode: ";', hint:'اطلب من المستخدم إدخال الرمز'},
+      {code:'        cin >> passcode;', hint:'اقرأ الرمز'},
+      {code:'        if (passcode != correctCode) {', hint:'هل الرمز غير صحيح؟'},
+      {code:'            cout << "Incorrect! Try again." << endl;', hint:'اطبع رسالة المحاولة مرة أخرى'},
+      {code:'        }', hint:'إغلاق if'},
+      {code:'    } while (passcode != correctCode);', hint:'استمر حتى يساوي الرمز الصحيح'},
+      {code:'    cout << "Access Granted!";', hint:'رسالة نجاح عند صحة الرمز'},
+      {code:'    return 0;', hint:'إنهاء البرنامج'},
+      {code:'}', hint:'إغلاق main'},
+    ],
+    answer: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+  },
+  {
+    id: 'p4',
+    title: 'Example 4: Multiplication Tables (Nested For)',
+    q: 'Arrange the blocks to print multiplication tables for two consecutive numbers: n and n+1.',
+    blocks: [
+      {code:'#include <iostream>', hint:'إضافة مكتبة الإدخال/الإخراج'},
+      {code:'using namespace std;', hint:'لاستخدام cout/cin مباشرة'},
+      {code:'int main() {', hint:'بداية البرنامج'},
+      {code:'    int n;', hint:'تعريف المتغير n'},
+      {code:'    cout << "Enter a number n: ";', hint:'اطلب إدخال n من المستخدم'},
+      {code:'    cin >> n;', hint:'قراءة قيمة n'},
+      {code:'    for (int i = n; i <= n + 1; i++) {', hint:'حلقة خارجية للعددين n و n+1'},
+      {code:'        cout << "Table for " << i << ":" << endl;', hint:'عنوان جدول الضرب الحالي'},
+      {code:'        for (int j = 1; j <= i; j++) {', hint:'حلقة داخلية من 1 إلى i'},
+      {code:'            cout << i << " * " << j << " = " << (i * j) << endl;', hint:'طباعة عملية الضرب'},
+      {code:'        }', hint:'إغلاق الحلقة الداخلية'},
+      {code:'        cout << "----------------" << endl;', hint:'فاصل بين الجدولين'},
+      {code:'    }', hint:'إغلاق الحلقة الخارجية'},
+      {code:'    return 0;', hint:'إنهاء البرنامج'},
+      {code:'}', hint:'إغلاق main'},
+    ],
+    answer: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+  },
+  {
+    id: 'p5',
+    title: 'Area Calculator (Switch)',
+    q: 'Arrange the blocks to calculate area for Triangle, Rectangle, Square, and Circle using switch.',
+    blocks: [
+      {code:'#include <iostream>', hint:'إضافة مكتبة الإدخال/الإخراج'},
+      {code:'using namespace std;', hint:'لاستخدام cout/cin مباشرة'},
+      {code:'int main() {', hint:'بداية البرنامج'},
+      {code:'    int shape;', hint:'متغير لاختيار الشكل'},
+      {code:'    cout << "Select shape to calculate area:\\n1. Triangle\\n2. Rectangle\\n3. Square\\n4. Circle" << endl;', hint:'عرض قائمة الأشكال'},
+      {code:'    cin >> shape;', hint:'قراءة اختيار المستخدم'},
+      {code:'    switch (shape) {', hint:'بدء switch'},
+      {code:'        case 1: { float b, h; cout << "Enter base and height: "; cin >> b >> h; cout << "Area: " << 0.5 * b * h; break; }', hint:'المثلث: 0.5 × القاعدة × الارتفاع'},
+      {code:'        case 2: { float l, w; cout << "Enter length and width: "; cin >> l >> w; cout << "Area: " << l * w; break; }', hint:'المستطيل: الطول × العرض'},
+      {code:'        case 3: { float s; cout << "Enter side length: "; cin >> s; cout << "Area: " << s * s; break; }', hint:'المربع: الضلع²'},
+      {code:'        case 4: { float r; cout << "Enter radius: "; cin >> r; cout << "Area: " << 3.14159 * r * r; break; }', hint:'الدائرة: π × r²'},
+      {code:'        default: cout << "Invalid selection!";', hint:'عند إدخال رقم غير 1-4'},
+      {code:'    }', hint:'إغلاق switch'},
+      {code:'    return 0;', hint:'إنهاء البرنامج'},
+      {code:'}', hint:'إغلاق main'},
+    ],
+    answer: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+  }
+];
+ 
+let puzzleState = {};
+ 
+function renderPuzzles() {
+  const list = document.getElementById('puzzle-list');
+  list.innerHTML = PUZZLES.map(p => {
+    puzzleState[p.id] = { pool: [...p.answer], drop: [] };
+    const shuffled = [...p.answer].sort(() => Math.random() - 0.5);
+    puzzleState[p.id].pool = [...shuffled];
+    return `
+    <div class="puzzle-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:.8rem">
+        <span style="background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:8px">${p.title}</span>
+      </div>
+      <div class="puzzle-q">${p.q}</div>
+      <div class="puzzle-area">
+        <div class="blocks-pool">
+          <div class="blocks-pool-title">🔲 Available Blocks</div>
+          <div class="pool-list" id="pool_${p.id}">
+            ${shuffled.map(idx => renderBlock(p.id, idx, p.blocks[idx])).join('')}
+          </div>
+        </div>
+        <div class="drop-zone">
+          <div class="drop-zone-title">📋 Your Solution (drag here)</div>
+          <div class="drop-list" id="drop_${p.id}" 
+            ondragover="event.preventDefault();this.classList.add('drag-over')"
+            ondragleave="this.classList.remove('drag-over')"
+            ondrop="dropBlock('${p.id}',event)">
+            <div class="drop-placeholder" id="ph_${p.id}">Drop blocks here to build your solution</div>
+          </div>
+        </div>
+      </div>
+      <div class="puzzle-actions">
+        <button class="check-puzzle-btn" onclick="checkPuzzle('${p.id}')">✅ Check Solution</button>
+        <button class="reset-puzzle-btn" onclick="resetPuzzle('${p.id}')">🔄 Reset</button>
+      </div>
+      <div class="puzzle-result" id="pres_${p.id}"></div>
+    </div>`;
+  }).join('');
+}
+ 
+function renderBlock(pid, idx, block) {
+  return `<div class="block" draggable="true" id="blk_${pid}_${idx}"
+    ondragstart="dragBlock('${pid}',${idx},event)" onclick="clickBlock('${pid}',${idx})">
+    <span style="flex:1;overflow-x:auto">${block.code}</span>
+    <button class="hint-btn" onclick="toggleHint('${pid}',${idx},event)">💡</button>
+    <div class="block-hint" id="hint_${pid}_${idx}">Line #${idx+1}: ${block.hint}</div>
+  </div>`;
+}
+ 
+function renderDropItem(pid, idx, block) {
+  return `<div class="drop-item" id="dropped_${pid}_${idx}">
+    <span class="line-badge">${puzzleState[pid].drop.indexOf(idx)+1}</span>
+    <span style="flex:1;font-size:12px;overflow-x:auto">${block.code}</span>
+    <button class="remove-btn" onclick="removeFromDrop('${pid}',${idx})">✕</button>
+  </div>`;
+}
+ 
+function dragBlock(pid, idx, e) {
+  e.dataTransfer.setData('text/plain', JSON.stringify({pid, idx}));
+}
+ 
+function dropBlock(pid, e) {
+  e.preventDefault();
+  document.getElementById('drop_' + pid).classList.remove('drag-over');
+  try {
+    const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+    if (data.pid !== pid) return;
+    addToSolution(pid, data.idx);
+  } catch(err){}
+}
+ 
+function clickBlock(pid, idx) {
+  addToSolution(pid, idx);
+}
+ 
+function addToSolution(pid, idx) {
+  const state = puzzleState[pid];
+  const poolIdx = state.pool.indexOf(idx);
+  if (poolIdx === -1) return; // already in drop
+  state.pool.splice(poolIdx, 1);
+  state.drop.push(idx);
+  refreshPuzzleUI(pid);
+}
+ 
+function removeFromDrop(pid, idx) {
+  const state = puzzleState[pid];
+  const dropIdx = state.drop.indexOf(idx);
+  if (dropIdx === -1) return;
+  state.drop.splice(dropIdx, 1);
+  state.pool.push(idx);
+  refreshPuzzleUI(pid);
+}
+ 
+function refreshPuzzleUI(pid) {
+  const p = PUZZLES.find(x => x.id === pid);
+  const state = puzzleState[pid];
+  // pool
+  const poolEl = document.getElementById('pool_' + pid);
+  poolEl.innerHTML = state.pool.length ? state.pool.map(idx => renderBlock(pid, idx, p.blocks[idx])).join('') : '<div style="text-align:center;color:#aaa;font-size:13px;padding:10px">All blocks used!</div>';
+  // drop
+  const dropEl = document.getElementById('drop_' + pid);
+  if (state.drop.length === 0) {
+    dropEl.innerHTML = `<div class="drop-placeholder" id="ph_${pid}">Drop blocks here to build your solution</div>`;
+  } else {
+    dropEl.innerHTML = state.drop.map((idx, pos) => {
+      return `<div class="drop-item" id="dropped_${pid}_${pos}">
+        <span class="line-badge">${pos+1}</span>
+        <span style="flex:1;font-size:12px;overflow-x:auto">${p.blocks[idx].code}</span>
+        <button class="remove-btn" onclick="removeFromDrop('${pid}',${idx})">✕</button>
+      </div>`;
+    }).join('');
+  }
+  // reset result
+  const res = document.getElementById('pres_' + pid);
+  res.className = 'puzzle-result';
+  res.style.display = 'none';
+}
+ 
+function toggleHint(pid, idx, e) {
+  e.stopPropagation();
+  const hint = document.getElementById(`hint_${pid}_${idx}`);
+  hint.classList.toggle('show');
+}
+ 
+function checkPuzzle(pid) {
+  const p = PUZZLES.find(x => x.id === pid);
+  const state = puzzleState[pid];
+  const res = document.getElementById('pres_' + pid);
+  if (state.drop.length !== p.answer.length) {
+    res.className = 'puzzle-result show wrong-fb';
+    res.style.display = 'block';
+    res.textContent = `❌ You have ${state.drop.length} of ${p.answer.length} blocks placed. Place all blocks first!`;
+    return;
+  }
+  const isCorrect = JSON.stringify(state.drop) === JSON.stringify(p.answer);
+  if (isCorrect) {
+    res.className = 'puzzle-result show correct-fb';
+    res.style.display = 'block';
+    res.textContent = '✅ Perfect! Your solution is correct! 🎉';
+  } else {
+    // Find first wrong position
+    let firstWrong = -1;
+    for (let i = 0; i < state.drop.length; i++) {
+      if (state.drop[i] !== p.answer[i]) { firstWrong = i; break; }
+    }
+    res.className = 'puzzle-result show wrong-fb';
+    res.style.display = 'block';
+    res.innerHTML = `❌ Not quite! Check line ${firstWrong+1}. 💡 Hint for correct block: ${p.blocks[p.answer[firstWrong]].hint}`;
+  }
+}
+ 
+function resetPuzzle(pid) {
+  const p = PUZZLES.find(x => x.id === pid);
+  const shuffled = [...p.answer].sort(() => Math.random() - 0.5);
+  puzzleState[pid] = { pool: [...shuffled], drop: [] };
+  refreshPuzzleUI(pid);
+  const res = document.getElementById('pres_' + pid);
+  res.className = 'puzzle-result';
+  res.style.display = 'none';
+}
+ 
+// ═══ COMPILER / SIMULATOR ═══
+const TEMPLATES = {
+  hello: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    cout << "Hello World!";
+    return 0;
+}`,
+  vars: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    int age = 20;
+    double gpa = 3.75;
+    string name = "Ahmed";
+    char grade = 'A';
+    bool passed = true;
+    
+    cout << "Name: " << name << "\\n";
+    cout << "Age: " << age << "\\n";
+    cout << "GPA: " << gpa << "\\n";
+    cout << "Grade: " << grade << "\\n";
+    cout << "Passed: " << passed << "\\n";
+    return 0;
+}`,
+  if: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    int score = 85;
+    
+    if (score >= 90) {
+        cout << "Grade: A";
+    } else if (score >= 80) {
+        cout << "Grade: B";
+    } else if (score >= 70) {
+        cout << "Grade: C";
+    } else {
+        cout << "Grade: F";
+    }
+    return 0;
+}`,
+  switch: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    int choice = 3;
+    
+    switch (choice) {
+        case 1: cout << "Coffee - $2"; break;
+        case 2: cout << "Tea - $1"; break;
+        case 3: cout << "Sandwich - $5"; break;
+        case 4: cout << "Salad - $4"; break;
+        case 5: cout << "Juice - $3"; break;
+        default: cout << "Invalid choice";
+    }
+    return 0;
+}`,
+  for: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    int n = 5;
+    for (int i = n; i <= n + 1; i++) {
+        cout << "Table for " << i << ":" << "\\n";
+        for (int j = 1; j <= i; j++) {
+            cout << i << " * " << j << " = " << (i * j) << "\\n";
+        }
+    }
+    return 0;
+}`,
+  while: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    int i = 1;
+    while (i <= 5) {
+        cout << "Count: " << i << "\\n";
+        i++;
+    }
+    return 0;
+}`,
+  dowhile: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    int passcode;
+    int correctCode = 1234;
+    int attempts = 0;
+    
+    do {
+        cout << "Enter passcode: ";
+        passcode = 1234;
+        attempts++;
+        if (passcode != correctCode) {
+            cout << "Incorrect! Try again.\\n";
+        }
+    } while (passcode != correctCode);
+    
+    cout << "Access Granted! (took " << attempts << " attempt)";
+    return 0;
+}`,
+  grade: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    float attendance = 80;
+    float score = 87;
+    
+    if (attendance >= 70) {
+        if (score >= 90 && score <= 100) cout << "Grade: A\\n";
+        else if (score >= 80 && score < 90) cout << "Grade: B\\n";
+        else if (score >= 70 && score < 80) cout << "Grade: C\\n";
+        else cout << "Fails to meet grade requirement.\\n";
+    } else {
+        cout << "Failed the attendance requirement.\\n";
+    }
+    return 0;
+}`
+};
+ 
+const FULL_CODES = [
+  {
+    title: 'Example 1: Student Status (Nested If)',
+    desc: 'Reads attendance first. If attendance is at least 70, it asks for exam score and assigns grade A/B/C. Otherwise it reports attendance failure.',
+    points: [
+      'يبدأ بقراءة نسبة الحضور في المتغير attendance.',
+      'إذا كانت نسبة الحضور أقل من 70% يتم طباعة رسالة فشل شرط الحضور مباشرة.',
+      'إذا كانت نسبة الحضور 70% أو أكثر، يطلب إدخال درجة الامتحان.',
+      'يستخدم if / else if لتحديد التقدير: A أو B أو C.',
+      'إذا كانت الدرجة أقل من 70 يطبع رسالة عدم تحقيق شرط النجاح.'
+    ],
+    code: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    float attendance, score;
+    cout << "Enter attendance percentage: ";
+    cin >> attendance;
+ 
+    if (attendance >= 70) {
+        cout << "Enter exam score: ";
+        cin >> score;
+ 
+        if (score >= 90 && score <= 100) cout << "Grade: A\\n";
+        else if (score >= 80 && score < 90) cout << "Grade: B\\n";
+        else if (score >= 70 && score < 80) cout << "Grade: C\\n";
+        else cout << "Fails to meet grade requirement.\\n";
+    } else {
+        cout << "Failed the attendance requirement.\\n";
+    }
+    return 0;
+}`
+  },
+  {
+    title: 'Example 2: Faculty Cafeteria Menu (Switch)',
+    desc: 'Displays a menu, takes user choice from 1 to 5, and prints the final price using switch-case with a default invalid-choice path.',
+    points: [
+      'يعرض قائمة تحتوي 5 اختيارات للمستخدم.',
+      'يقرأ رقم الاختيار في المتغير choice.',
+      'يستخدم switch للتفرع حسب الرقم المدخل.',
+      'كل case تطبع السعر النهائي ثم break لمنع الانتقال للحالة التالية.',
+      'default تعالج أي رقم خارج النطاق 1-5 برسالة Invalid choice.'
+    ],
+    code: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    int choice;
+    cout << "--- Faculty Cafeteria Menu ---" << endl;
+    cout << "1. Coffee - $2\\n2. Tea - $1\\n3. Sandwich - $5\\n4. Salad - $4\\n5. Juice - $3" << endl;
+    cout << "Enter your choice (1-5): ";
+    cin >> choice;
+ 
+    switch (choice) {
+        case 1: cout << "Final Price: $2\\n"; break;
+        case 2: cout << "Final Price: $1\\n"; break;
+        case 3: cout << "Final Price: $5\\n"; break;
+        case 4: cout << "Final Price: $4\\n"; break;
+        case 5: cout << "Final Price: $3\\n"; break;
+        default: cout << "Invalid choice\\n";
+    }
+    return 0;
+}`
+  },
+  {
+    title: 'Example 3: Passcode Check (Do-While)',
+    desc: 'Uses a do-while loop so input is requested at least once, then repeats until passcode matches the correct code.',
+    points: [
+      'يحفظ الكود الصحيح في ثابت correctCode.',
+      'حلقة do-while تضمن تنفيذ طلب الإدخال مرة واحدة على الأقل.',
+      'إذا كان الإدخال غير صحيح يطبع رسالة Try again.',
+      'تتكرر الحلقة طالما passcode لا يساوي correctCode.',
+      'عند التطابق يطبع Access Granted وينهي البرنامج.'
+    ],
+    code: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    int passcode;
+    const int correctCode = 1234;
+ 
+    do {
+        cout << "Enter the passcode: ";
+        cin >> passcode;
+        if (passcode != correctCode) {
+            cout << "Incorrect! Try again." << endl;
+        }
+    } while (passcode != correctCode);
+ 
+    cout << "Access Granted!";
+    return 0;
+}`
+  },
+  {
+    title: 'Example 4: Multiplication Tables (Nested For)',
+    desc: 'Reads n, then prints multiplication tables for n and n+1. Inner loop prints from 1 up to current table number.',
+    points: [
+      'يقرأ قيمة n من المستخدم.',
+      'الحلقة الخارجية تبدأ من n وتنتهي عند n+1 لطباعة جدولين متتاليين.',
+      'قبل كل جدول يطبع عنوان Table for i.',
+      'الحلقة الداخلية تطبع الضرب من 1 حتى i.',
+      'بعد كل جدول يطبع خط فاصل لسهولة القراءة.'
+    ],
+    code: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    int n;
+    cout << "Enter a number n: ";
+    cin >> n;
+ 
+    for (int i = n; i <= n + 1; i++) {
+        cout << "Table for " << i << ":" << endl;
+        for (int j = 1; j <= i; j++) {
+            cout << i << " * " << j << " = " << (i * j) << endl;
+        }
+        cout << "----------------" << endl;
+    }
+    return 0;
+}`
+  },
+  {
+    title: 'Example 5: Area Calculator (Switch)',
+    desc: 'Lets user choose a shape (triangle, rectangle, square, circle), asks for needed dimensions, then calculates area with switch.',
+    points: [
+      'يطلب من المستخدم اختيار الشكل المراد حساب مساحته.',
+      'switch يحدد فرع التنفيذ حسب الشكل المختار.',
+      'كل case يطلب المدخلات المناسبة لذلك الشكل (مثل base/height أو radius).',
+      'يحسب المساحة بالقانون المناسب ويطبع الناتج.',
+      'default تعالج أي اختيار غير صحيح برسالة تنبيه.'
+    ],
+    code: `#include <iostream>
+using namespace std;
+ 
+int main() {
+    int shape;
+    cout << "Select shape to calculate area:\\n1. Triangle\\n2. Rectangle\\n3. Square\\n4. Circle" << endl;
+    cin >> shape;
+ 
+    switch (shape) {
+        case 1: {
+            float b, h;
+            cout << "Enter base and height: ";
+            cin >> b >> h;
+            cout << "Area: " << 0.5 * b * h;
+            break;
+        }
+        case 2: {
+            float l, w;
+            cout << "Enter length and width: ";
+            cin >> l >> w;
+            cout << "Area: " << l * w;
+            break;
+        }
+        case 3: {
+            float s;
+            cout << "Enter side length: ";
+            cin >> s;
+            cout << "Area: " << s * s;
+            break;
+        }
+        case 4: {
+            float r;
+            cout << "Enter radius: ";
+            cin >> r;
+            cout << "Area: " << 3.14159 * r * r;
+            break;
+        }
+        default: cout << "Invalid selection!";
+    }
+    return 0;
+}`
+  }
+];
+ 
+function renderCodePage() {
+  const wrap = document.getElementById('code-list');
+  if (!wrap) return;
+  wrap.innerHTML = FULL_CODES.map(item => `
+    <div class="code-card">
+      <div class="code-head">${escapeHtml(item.title)}</div>
+      <div class="code-desc">${escapeHtml(item.desc)}</div>
+      <ul class="code-points">
+        ${(item.points || []).map(p => `<li>${escapeHtml(p)}</li>`).join('')}
+      </ul>
+      <pre class="code-block">${escapeHtml(item.code)}</pre>
+    </div>
+  `).join('');
+}
+ 
+function loadTemplate(name) {
+  document.getElementById('code-editor').value = TEMPLATES[name] || '';
+}
+ 
+function clearEditor() {
+  document.getElementById('code-editor').value = '';
+  document.getElementById('output-area').textContent = '// Output cleared';
+  document.getElementById('output-area').className = 'output-area';
+}
+ 
+function runCode() {
+  const code = document.getElementById('code-editor').value;
+  const out = document.getElementById('output-area');
+  out.className = 'output-area';
+  try {
+    const result = simulateCpp(code);
+    out.textContent = result || '(no output)';
+  } catch(e) {
+    out.className = 'output-area error-out';
+    out.textContent = 'Simulation Error: ' + e.message;
+  }
+}
+ 
+function simulateCpp(code) {
+  // Remove comments
+  let c = code.replace(/\/\/[^\n]*/g, '').replace(/\/\*[\s\S]*?\*\//g, '');
+  // Extract main body
+  const mainMatch = c.match(/int\s+main\s*\(\s*\)\s*\{([\s\S]*)\}/);
+  if (!mainMatch) return '[Error: No main() function found]';
+  const body = mainMatch[1];
+  return interpretBody(body, {});
+}
+ 
+function interpretBody(code, vars) {
+  let output = '';
+  // Remove return statements for processing
+  let lines = code.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('return'));
+ 
+  // Simple interpreter
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    
+    // Variable declarations
+    const varMatch = line.match(/^(int|double|float|string|char|bool)\s+(\w+)\s*=\s*(.+?);$/);
+    if (varMatch) {
+      const [,type,name,val] = varMatch;
+      vars[name] = parseVal(val.trim(), vars, type);
+      i++; continue;
+    }
+    // const int
+    const constMatch = line.match(/^const\s+(int|double|float)\s+(\w+)\s*=\s*(.+?);$/);
+    if (constMatch) {
+      const [,type,name,val] = constMatch;
+      vars[name] = parseVal(val.trim(), vars, type);
+      i++; continue;
+    }
+    // Assignment
+    const assignMatch = line.match(/^(\w+)\s*=\s*(.+?);$/);
+    if (assignMatch && vars.hasOwnProperty(assignMatch[1])) {
+      vars[assignMatch[1]] = parseVal(assignMatch[2].trim(), vars);
+      i++; continue;
+    }
+    // Increment/decrement
+    if (line.match(/^\+\+\w+;$|^\w+\+\+;$/)) {
+      const name = line.replace(/[++;]/g,'').trim();
+      if(vars[name]!==undefined) vars[name]++;
+      i++; continue;
+    }
+    if (line.match(/^--\w+;$|^\w+--;$/)) {
+      const name = line.replace(/[-;]/g,'').trim();
+      if(vars[name]!==undefined) vars[name]--;
+      i++; continue;
+    }
+    // cout
+    const coutMatch = line.match(/^cout\s*<<\s*(.+?);$/);
+    if (coutMatch) {
+      output += evalCout(coutMatch[1], vars);
+      i++; continue;
+    }
+    // if/else if/else block
+    if (line.match(/^if\s*\(/) || line.match(/^else\s*if\s*\(/) || line === 'else {' || line === 'else{') {
+      const result = processIfBlock(lines, i, vars);
+      output += result.output;
+      i = result.nextIndex;
+      continue;
+    }
+    // for loop
+    if (line.match(/^for\s*\(/)) {
+      const result = processForLoop(lines, i, vars);
+      output += result.output;
+      i = result.nextIndex;
+      continue;
+    }
+    // while loop
+    if (line.match(/^while\s*\(/)) {
+      const result = processWhileLoop(lines, i, vars);
+      output += result.output;
+      i = result.nextIndex;
+      continue;
+    }
+    // do-while
+    if (line === 'do {' || line === 'do{') {
+      // Simulate do-while: just execute body once for display purposes
+      const bodyLines = [];
+      let depth = 1; let j = i+1;
+      while(j < lines.length && depth > 0) {
+        const l = lines[j];
+        if (l.includes('{')) depth++;
+        if (l.match(/^\}\s*while/)) { depth = 0; }
+        else if (l === '}') depth--;
+        if (depth > 0) bodyLines.push(l);
+        j++;
+      }
+      // Execute body once
+      output += interpretBody(bodyLines.join('\n'), {...vars});
+      i = j; continue;
+    }
+    // switch
+    if (line.match(/^switch\s*\(/)) {
+      const result = processSwitchBlock(lines, i, vars);
+      output += result.output;
+      i = result.nextIndex;
+      continue;
+    }
+    i++;
+  }
+  return output;
+}
+ 
+function parseVal(val, vars, type) {
+  val = val.trim();
+  if (val.startsWith('"') && val.endsWith('"')) return val.slice(1,-1).replace(/\\n/g,'\n');
+  if (val.startsWith("'") && val.endsWith("'")) return val[1];
+  if (val === 'true') return 1;
+  if (val === 'false') return 0;
+  if (vars[val] !== undefined) return vars[val];
+  try { return Function(...Object.keys(vars), `return ${val}`)(...Object.values(vars)); }
+  catch(e) { return val; }
+}
+ 
+function evalCout(expr, vars) {
+  // Split by << 
+  const parts = expr.split('<<').map(p=>p.trim());
+  let result = '';
+  for (const part of parts) {
+    if (!part) continue;
+    if (part.startsWith('"') && part.endsWith('"')) {
+      result += part.slice(1,-1).replace(/\\n/g,'\n').replace(/\\t/g,'\t');
+    } else if (part === 'endl') {
+      result += '\n';
+    } else if (vars[part] !== undefined) {
+      result += vars[part];
+    } else {
+      try {
+        const val = Function(...Object.keys(vars), `return ${part}`)(...Object.values(vars));
+        result += val;
+      } catch(e) { result += part; }
+    }
+  }
+  return result;
+}
+ 
+function extractBlock(lines, startIdx) {
+  // Extract lines inside {} starting from startIdx
+  let depth = 0;
+  let body = [];
+  let i = startIdx;
+  while (i < lines.length) {
+    const l = lines[i];
+    if (l.includes('{')) depth++;
+    if (l.includes('}')) {
+      depth--;
+      if (depth === 0) return { body, endIdx: i };
+    }
+    if (depth > 0 && !l.endsWith('{')) body.push(l);
+    i++;
+  }
+  return { body, endIdx: i };
+}
+ 
+function evalCondition(cond, vars) {
+  cond = cond.trim();
+  try {
+    return Function(...Object.keys(vars), `return !!(${cond})`)(...Object.values(vars));
+  } catch(e) { return false; }
+}
+ 
+function extractCondition(line) {
+  const m = line.match(/\((.+)\)/);
+  return m ? m[1] : 'false';
+}
+ 
+function processIfBlock(lines, startIdx, vars) {
+  let output = '';
+  let i = startIdx;
+  let executed = false;
+ 
+  while (i < lines.length) {
+    const line = lines[i];
+    const isIf = line.match(/^if\s*\(/);
+    const isElseIf = line.match(/^else\s*if\s*\(/);
+    const isElse = line.match(/^else\s*\{/) || line === 'else {';
+ 
+    if (isIf || isElseIf) {
+      const cond = extractCondition(line);
+      if (!executed && evalCondition(cond, vars)) {
+        const { body, endIdx } = extractBlock(lines, i);
+        output += interpretBody(body.join('\n'), {...vars});
+        executed = true;
+        i = endIdx + 1;
+      } else {
+        const { endIdx } = extractBlock(lines, i);
+        i = endIdx + 1;
+      }
+    } else if (isElse) {
+      if (!executed) {
+        const { body, endIdx } = extractBlock(lines, i);
+        output += interpretBody(body.join('\n'), {...vars});
+        i = endIdx + 1;
+      } else {
+        const { endIdx } = extractBlock(lines, i);
+        i = endIdx + 1;
+      }
+      break;
+    } else {
+      break;
+    }
+  }
+  return { output, nextIndex: i };
+}
+ 
+function processForLoop(lines, startIdx, vars) {
+  let output = '';
+  const line = lines[startIdx];
+  const m = line.match(/^for\s*\(\s*(.+?)\s*;\s*(.+?)\s*;\s*(.+?)\s*\)/);
+  if (!m) return { output: '[for parse error]', nextIndex: startIdx+1 };
+  const [, init, cond, update] = m;
+  const localVars = {...vars};
+  // init
+  const initMatch = init.match(/^(int|double|float)\s+(\w+)\s*=\s*(.+)$/);
+  if (initMatch) localVars[initMatch[2]] = parseVal(initMatch[3], localVars);
+  const { body, endIdx } = extractBlock(lines, startIdx);
+  let iters = 0;
+  while (evalCondition(cond, localVars) && iters < 200) {
+    output += interpretBody(body.join('\n'), {...localVars});
+    // update vars back
+    const keys = Object.keys(localVars);
+    const tempOut = interpretBody(body.join('\n'), {...localVars});
+    // apply update
+    const updMatch = update.match(/(\w+)(\+\+|--)/) || update.match(/(\+\+|--)?(\w+)/);
+    if (update.includes('++')) {
+      const name = update.replace('++','').replace(';','').trim();
+      if (localVars[name] !== undefined) localVars[name]++;
+    } else if (update.includes('--')) {
+      const name = update.replace('--','').replace(';','').trim();
+      if (localVars[name] !== undefined) localVars[name]--;
+    } else {
+      const assMatch = update.match(/(\w+)\s*=\s*(.+)/);
+      if (assMatch) localVars[assMatch[1]] = parseVal(assMatch[2], localVars);
+    }
+    iters++;
+  }
+  return { output, nextIndex: endIdx + 1 };
+}
+ 
+function processWhileLoop(lines, startIdx, vars) {
+  let output = '';
+  const line = lines[startIdx];
+  const cond = extractCondition(line);
+  const localVars = {...vars};
+  const { body, endIdx } = extractBlock(lines, startIdx);
+  let iters = 0;
+  while (evalCondition(cond, localVars) && iters < 200) {
+    output += interpretBody(body.join('\n'), localVars);
+    iters++;
+    // safety: if no vars change, break
+    if (iters > 50 && output.length > 2000) break;
+  }
+  return { output, nextIndex: endIdx + 1 };
+}
+ 
+function processSwitchBlock(lines, startIdx, vars) {
+  let output = '';
+  const line = lines[startIdx];
+  const m = line.match(/switch\s*\(\s*(\w+)\s*\)/);
+  if (!m) return { output: '[switch error]', nextIndex: startIdx+1 };
+  const varName = m[1];
+  const val = vars[varName];
+  const { body, endIdx } = extractBlock(lines, startIdx);
+  // Parse cases
+  let matched = false;
+  let capturing = false;
+  let capturedLines = [];
+  for (const bl of body) {
+    const caseMatch = bl.match(/^case\s+(.+?)\s*:/);
+    const defMatch = bl.match(/^default\s*:/);
+    if (caseMatch) {
+      const caseVal = parseVal(caseMatch[1], vars);
+      if (String(caseVal) === String(val) || caseVal === val) { matched = true; capturing = true; }
+      else if (!capturing) continue;
+    } else if (defMatch) {
+      if (!matched) capturing = true;
+    } else if (bl.trim() === 'break;' || bl.trim() === 'break') {
+      if (capturing) break;
+    } else if (capturing) {
+      capturedLines.push(bl);
+    }
+  }
+  if (capturedLines.length) output = interpretBody(capturedLines.join('\n'), vars);
+  else if (!matched) {
+    // find default
+    const defIdx = body.findIndex(b => b.match(/^default\s*:/));
+    if (defIdx >= 0) output = interpretBody(body.slice(defIdx+1).join('\n'), vars);
+  }
+  return { output, nextIndex: endIdx + 1 };
+}
+ 
+// ═══ INIT ═══
+function applyTheme(theme) {
+  const isDark = theme === 'dark';
+  document.body.classList.toggle('dark-theme', isDark);
+  const icon = document.getElementById('theme-toggle-icon');
+  const label = document.getElementById('theme-toggle-label');
+  if (icon) icon.textContent = isDark ? '☀' : '◐';
+  if (label) label.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+}
+ 
+function toggleTheme() {
+  const isDark = document.body.classList.contains('dark-theme');
+  const nextTheme = isDark ? 'light' : 'dark';
+  applyTheme(nextTheme);
+  localStorage.setItem('site-theme', nextTheme);
+}
+ 
+document.addEventListener('DOMContentLoaded', function() {
+  const savedTheme = localStorage.getItem('site-theme');
+  applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
+  showScreen('idle');
+  renderQuestionBank();
+  renderCodePage();
+  renderPuzzles();
+});
+</script>
+</body>
+</html>
